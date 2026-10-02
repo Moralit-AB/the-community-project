@@ -41,9 +41,7 @@ function git(args) {
   return execFileSync("git", args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
 }
 
-const files = (
-  scanAll ? git(["ls-files"]) : git(["diff", "--cached", "--name-only", "--diff-filter=ACMR"])
-)
+const files = (scanAll ? git(["ls-files"]) : git(["diff", "--cached", "--name-only", "--diff-filter=ACMR"]))
   .split("\n")
   .filter(Boolean);
 

@@ -1,1 +1,81 @@
 @import "tailwindcss";
+
+/* Brand colors are injected per request from Admin → Settings (see app/layout.tsx).
+   These defaults are only used if that fails. */
+:root {
+  --brand-primary: #4f46e5;
+  --brand-primary-fg: #ffffff;
+  --brand-accent: #f59e0b;
+  --brand-accent-fg: #000000;
+
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b1120;
+    --surface: #111827;
+    --foreground: #e5e7eb;
+    --muted: #94a3b8;
+    --border: #1f2937;
+  }
+}
+
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+@theme inline {
+  --color-primary: var(--brand-primary);
+  --color-primary-fg: var(--brand-primary-fg);
+  --color-accent: var(--brand-accent);
+  --color-accent-fg: var(--brand-accent-fg);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+a {
+  text-underline-offset: 2px;
+}
+
+/* Typography for rendered markdown (announcements, events, privacy policy). */
+.prose-content {
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.prose-content > * + * {
+  margin-top: 0.85em;
+}
+.prose-content h1,
+.prose-content h2,
+.prose-content h3 {
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 1.4em;
+}
+.prose-content h1 { font-size: 1.5rem; }
+.prose-content h2 { font-size: 1.25rem; }
+.prose-content h3 { font-size: 1.05rem; }
+.prose-content ul { list-style: disc; padding-left: 1.4em; }
+.prose-content ol { list-style: decimal; padding-left: 1.4em; }
+.prose-content li + li { margin-top: 0.25em; }
+.prose-content a { color: var(--brand-primary); text-decoration: underline; }
+.prose-content blockquote { border-left: 3px solid var(--border); padding-left: 1em; color: var(--muted); }
+.prose-content code { background: var(--background); border-radius: 4px; padding: 0.1em 0.3em; font-size: 0.9em; }
+.prose-content table { border-collapse: collapse; }
+.prose-content th, .prose-content td { border: 1px solid var(--border); padding: 0.3em 0.6em; }

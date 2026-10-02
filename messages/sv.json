@@ -1,0 +1,539 @@
+{
+  "Common": {
+    "copy": "Kopiera",
+    "copied": "Kopierat!",
+    "notFound": "Sidan hittades inte",
+    "goHome": "Gå till startsidan",
+    "errorTitle": "Något gick fel",
+    "errorBody": "Försök igen. Om det fortsätter, kontakta en admin.",
+    "tryAgain": "Försök igen"
+  },
+  "Nav": {
+    "home": "Hem",
+    "events": "Evenemang",
+    "announcements": "Nyheter",
+    "membership": "Medlemskap",
+    "profile": "Profil",
+    "admin": "Admin",
+    "login": "Logga in",
+    "join": "Bli medlem",
+    "logout": "Logga ut"
+  },
+  "Footer": {
+    "privacy": "Integritetspolicy",
+    "poweredBy": "Drivs med The Community Project"
+  },
+  "Landing": {
+    "join": "Ansök om medlemskap",
+    "login": "Logga in",
+    "features": {
+      "events": { "title": "Evenemang", "body": "Se vad som händer och anmäl dig med ett klick." },
+      "membership": { "title": "Medlemskap", "body": "Allt om ditt medlemskap och din avgift på ett ställe." },
+      "news": { "title": "Nyheter", "body": "Håll dig uppdaterad med nyheter från arrangörerna." }
+    }
+  },
+  "Auth": {
+    "loginTitle": "Logga in",
+    "loginIntro": "Ange din e-postadress så skickar vi en inloggningslänk. Inget lösenord behövs.",
+    "joinTitle": "Bli medlem i {community}",
+    "joinIntro": "Fyll i formuläret och bekräfta din e-postadress för att bli medlem.",
+    "joinIntroApproval": "Fyll i formuläret och bekräfta din e-postadress. Sedan granskar en admin din ansökan.",
+    "joinFee": "Medlemskapet kostar {amount} per {period}. Du hittar betalningsuppgifterna när du har blivit godkänd.",
+    "joinMessagePrompt": "Berätta lite om dig själv och varför du vill bli medlem",
+    "periods": {
+      "year": "år",
+      "half-year": "halvår",
+      "quarter": "kvartal",
+      "month": "månad",
+      "none": "period"
+    },
+    "email": "E-postadress",
+    "name": "Ditt namn",
+    "nameHint": "Visas för andra medlemmar.",
+    "optional": "valfritt",
+    "privacyConsent": "Jag har läst <link>integritetspolicyn</link> och godkänner att mina uppgifter används som beskrivs där.",
+    "sendLink": "Skicka inloggningslänk",
+    "sending": "Skickar…",
+    "requestMembership": "Ansök om medlemskap",
+    "notMember": "Inte medlem än?",
+    "alreadyMember": "Redan medlem?",
+    "login": "Logga in",
+    "checkEmailTitle": "Kolla din inkorg",
+    "checkEmail": "Om det finns ett konto för adressen har vi skickat en inloggningslänk till",
+    "checkEmailJoin": "Vi har skickat en länk för att bekräfta din e-postadress till",
+    "codeLabel": "Eller skriv in koden från mejlet",
+    "codeHint": "Smidigt om du öppnade mejlet på en annan enhet.",
+    "verify": "Logga in med kod",
+    "verifying": "Kontrollerar…",
+    "useAnotherEmail": "Använd en annan e-postadress",
+    "errors": {
+      "invalidEmail": "Ange en giltig e-postadress.",
+      "nameRequired": "Ange ditt namn.",
+      "messageRequired": "Skriv ett kort meddelande.",
+      "privacyRequired": "Bekräfta att du har läst integritetspolicyn.",
+      "invalidCode": "Koden fungerade inte. Kontrollera den, eller begär en ny länk.",
+      "rateLimited": "För många försök. Vänta en minut och försök igen.",
+      "generic": "Något gick fel när mejlet skulle skickas. Försök igen senare.",
+      "linkExpired": "Inloggningslänken har gått ut eller redan använts. Begär en ny nedan."
+    }
+  },
+  "Pending": {
+    "pending": {
+      "title": "Tack, {name}!",
+      "body": "Vi har tagit emot din ansökan om medlemskap i {community} och din e-postadress är bekräftad.",
+      "next": "En admin granskar din ansökan. Du får ett mejl när du har blivit godkänd."
+    },
+    "rejected": {
+      "title": "Din ansökan godkändes inte",
+      "body": "Tyvärr godkändes inte din ansökan om medlemskap i {community}."
+    },
+    "suspended": {
+      "title": "Ditt medlemskap är pausat",
+      "body": "Ditt medlemskap i {community} är för närvarande avstängt."
+    },
+    "approved": {
+      "title": "Välkommen, {name}!",
+      "body": "Du är medlem i {community}."
+    },
+    "contact": "Frågor? Kontakta"
+  },
+  "Privacy": {
+    "title": "Integritetspolicy",
+    "updated": "Senast uppdaterad {date} (version {version})",
+    "missing": "Integritetspolicyn har inte publicerats än.",
+    "bannerNew": "Läs gärna vår integritetspolicy.",
+    "bannerUpdated": "Vi har uppdaterat vår integritetspolicy.",
+    "readPolicy": "Läs den här",
+    "acknowledge": "Uppfattat"
+  },
+  "Home": {
+    "greeting": "Hej {name}!",
+    "membershipPeriod": "Medlemsavgift {period}",
+    "payNow": "Så betalar du",
+    "upcomingEvents": "Kommande evenemang",
+    "latestNews": "Senaste nytt",
+    "seeAll": "Visa alla",
+    "youreGoing": "Du är anmäld",
+    "noEvents": "Inga kommande evenemang just nu.",
+    "noNews": "Inga nyheter än.",
+    "pinned": "Fäst",
+    "adminHint": "Du är admin: hantera medlemmar, evenemang och inställningar under Admin."
+  },
+  "Payment": {
+    "amount": "Belopp",
+    "reference": "Betalningsreferens",
+    "swish": "Swish",
+    "accountHolder": "Mottagare",
+    "bank": "Bank",
+    "accountNumber": "Kontonummer",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "qrAlt": "QR-kod för betalning",
+    "iHavePaid": "Jag har betalat",
+    "iHavePaidHint": "Meddela admins så att de kan bekräfta din betalning.",
+    "reportedInfo": "Tack! Du har rapporterat betalningen. En admin bekräftar den snart.",
+    "periods": {
+      "year": "år",
+      "half-year": "halvår",
+      "quarter": "kvartal",
+      "month": "månad",
+      "none": "period"
+    },
+    "status": {
+      "unpaid": "Ej betald",
+      "reported": "Rapporterad som betald",
+      "confirmed": "Betald",
+      "waived": "Befriad",
+      "overdue": "Försenad"
+    }
+  },
+  "Membership": {
+    "title": "Medlemskap",
+    "memberSince": "Medlem nr {number} sedan {date}",
+    "noFeeTitle": "Ingen medlemsavgift",
+    "noFeeBody": "Medlemskapet är gratis. Välkommen!",
+    "currentPeriod": "Avgift för {period}",
+    "feeDescription": "Avgiften är {amount} per {period} och ska betalas senast {due}.",
+    "paid": "Din avgift för perioden är betald. Tack!",
+    "waived": "Du är befriad från avgiften den här perioden.",
+    "noPaymentDetails": "Betalningsuppgifterna har inte lagts in än. Kontakta {contact}.",
+    "history": "Betalningshistorik",
+    "period": "Period",
+    "status": "Status"
+  },
+  "Events": {
+    "title": "Evenemang",
+    "intro": "Anmäl dig till evenemang och lägg till dem i din kalender.",
+    "upcoming": "Kommande",
+    "past": "Tidigare evenemang",
+    "noUpcoming": "Inga kommande evenemang just nu. Titta in snart igen!",
+    "youreGoing": "Du är anmäld",
+    "spots": "{taken} / {capacity} platser tagna",
+    "goingCount": "{count, plural, =0 {Ingen anmäld än} one {# anmäld} other {# anmälda}}",
+    "back": "Alla evenemang",
+    "draft": "Utkast",
+    "noDescription": "Ingen beskrivning.",
+    "when": "När",
+    "where": "Var",
+    "fee": "Avgift",
+    "capacity": "Platser",
+    "deadline": "Anmäl dig senast",
+    "addToCalendar": "Lägg till i kalendern (.ics)",
+    "rsvp": "Jag kommer",
+    "cancelRsvp": "Avboka min plats",
+    "cancelConfirm": "Avboka din plats på evenemanget?",
+    "rsvpGoing": "Vi ses! Du står på listan.",
+    "rsvpCancelled": "Din plats är avbokad.",
+    "rsvpError": "Något gick fel. Försök igen.",
+    "full": "Evenemanget är fullt.",
+    "closed": "Anmälan till evenemanget är stängd.",
+    "started": "Evenemanget har redan börjat.",
+    "payForEvent": "Betala för evenemanget",
+    "paid": "Din betalning för evenemanget är bekräftad. Tack!",
+    "noPaymentDetails": "Betalningsuppgifterna har inte lagts in än. Kontakta en admin.",
+    "whosGoing": "Vilka som kommer ({count})"
+  },
+  "Announcements": {
+    "title": "Nyheter",
+    "intro": "Nyheter från arrangörerna.",
+    "empty": "Inga nyheter än.",
+    "pinned": "Fäst",
+    "back": "Alla nyheter",
+    "draft": "Utkast",
+    "comments": "Kommentarer ({count})",
+    "formerMember": "Tidigare medlem",
+    "commentDeleted": "Kommentaren har tagits bort.",
+    "deleteComment": "Ta bort",
+    "commentPlaceholder": "Skriv en kommentar…",
+    "postComment": "Skicka kommentar",
+    "commentsClosed": "Kommentarer är stängda för det här inlägget.",
+    "commentsOff": "Kommentarer är avstängda.",
+    "commentInvalid": "Skriv en kommentar (högst 5000 tecken).",
+    "commentError": "Kommentaren kunde inte skickas."
+  },
+  "Profile": {
+    "title": "Din profil",
+    "displayName": "Namn",
+    "displayNameHint": "Visas för andra medlemmar vid evenemang och kommentarer.",
+    "language": "Språk",
+    "emailPreferences": "E-postaviseringar",
+    "notifyEvents": "Nya evenemang och påminnelser",
+    "notifyAnnouncements": "Nya nyheter",
+    "essentialEmails": "Du får alltid nödvändiga mejl, som inloggningslänkar och besked om medlemskap.",
+    "save": "Spara",
+    "saved": "Sparat.",
+    "saveError": "Kunde inte spara. Försök igen.",
+    "nameInvalid": "Ange ett namn (högst 80 tecken).",
+    "yourData": "Dina uppgifter",
+    "exportBody": "Ladda ner allt vi sparar om dig (profil, betalningar, anmälningar och kommentarer) som en fil.",
+    "export": "Ladda ner mina uppgifter",
+    "deleteTitle": "Radera konto",
+    "deleteBody": "Ditt konto och dina personuppgifter raderas permanent. Dina kommentarer visas som från en \"tidigare medlem\". Det går inte att ångra.",
+    "deleteConfirmLabel": "Skriv din e-postadress ({email}) för att bekräfta",
+    "deleteConfirmDialog": "Radera ditt konto permanent?",
+    "deleteConfirmMismatch": "E-postadressen stämmer inte.",
+    "deleteButton": "Radera mitt konto",
+    "deleteLastAdmin": "Du är den enda admin. Gör någon annan till admin innan du raderar ditt konto.",
+    "deleteError": "Kontot kunde inte raderas. Kontakta en admin."
+  },
+  "AdminNav": {
+    "overview": "Översikt",
+    "members": "Medlemmar",
+    "events": "Evenemang",
+    "announcements": "Nyheter",
+    "settings": "Inställningar",
+    "setup": "Installationskoll"
+  },
+  "AdminOverview": {
+    "title": "Admin",
+    "intro": "Hantera er gemenskap.",
+    "pending": "Ansökningar som väntar",
+    "members": "Medlemmar",
+    "upcomingEvents": "Kommande evenemang",
+    "unpaid": "Obetalda avgifter {period} ({reported} rapporterade)",
+    "setupHint": "Håller du på att sätta upp plattformen? <link>Installationskollen</link> visar om allt är rätt konfigurerat."
+  },
+  "AdminMembers": {
+    "title": "Medlemmar",
+    "exportCsv": "Exportera CSV",
+    "search": "Sök namn eller e-post",
+    "tabs": {
+      "pending": "Ansökningar",
+      "approved": "Medlemmar",
+      "suspended": "Avstängda",
+      "rejected": "Avslagna"
+    },
+    "empty": {
+      "pending": "Inga ansökningar väntar. 🎉",
+      "approved": "Inga medlemmar hittades.",
+      "suspended": "Inga avstängda medlemmar.",
+      "rejected": "Inga avslagna ansökningar."
+    },
+    "name": "Namn",
+    "email": "E-post",
+    "message": "Meddelande",
+    "fee": "Avgift {period}",
+    "since": "Medlem sedan",
+    "applied": "Ansökte",
+    "admin": "Admin",
+    "memberNumber": "Medlemsnummer",
+    "privacyAccepted": "Integritetspolicy godkänd",
+    "approve": "Godkänn",
+    "reject": "Avslå",
+    "rejectConfirm": "Avslå ansökan från {name}? Personen får ett mejl.",
+    "reactivate": "Återaktivera",
+    "suspend": "Stäng av",
+    "suspendConfirm": "Stäng av {name}? Personen kan inte använda plattformen förrän hen återaktiveras.",
+    "makeAdmin": "Gör till admin",
+    "makeAdminConfirm": "Gör {name} till admin? Admins kan hantera alla medlemmar, evenemang och inställningar.",
+    "removeAdmin": "Ta bort admin",
+    "removeAdminConfirm": "Ta bort adminbehörighet för {name}?",
+    "delete": "Radera",
+    "deleteConfirm": "Radera {name} och alla hens uppgifter permanent? Det går inte att ångra.",
+    "deleteSelf": "Du kan inte radera dig själv här. Använd din profilsida.",
+    "manage": "Hantera",
+    "confirm": "Bekräfta betald",
+    "waive": "Befria",
+    "markPaid": "Markera som betald",
+    "markUnpaid": "Markera obetald",
+    "payments": "Medlemsavgifter",
+    "noPaymentYet": "Ingen avgiftspost för {period} än (medlemmen har inte öppnat sin medlemssida).",
+    "period": "Period",
+    "status": "Status",
+    "events": "Anmäld till",
+    "reportedBanner": "{count, plural, one {# medlem har} other {# medlemmar har}} rapporterat att de betalat avgiften för {period}.",
+    "confirmAll": "Bekräfta alla rapporterade",
+    "confirmAllPrompt": "Bekräfta {count} rapporterade betalningar? Kontrollera dem mot banken först.",
+    "confirmedCount": "{count, plural, one {# betalning} other {# betalningar}} bekräftade.",
+    "statusChanged": {
+      "approved": "Godkänd. Ett mejl har skickats.",
+      "rejected": "Ansökan avslagen.",
+      "suspended": "Medlemmen är avstängd.",
+      "pending": "Status uppdaterad."
+    },
+    "madeAdmin": "Personen är nu admin.",
+    "removedAdmin": "Adminbehörigheten är borttagen.",
+    "lastAdmin": "Gemenskapen behöver minst en admin. Gör någon annan till admin först.",
+    "error": "Något gick fel. Försök igen."
+  },
+  "AdminEvents": {
+    "title": "Evenemang",
+    "new": "Nytt evenemang",
+    "edit": "Redigera evenemang",
+    "empty": "Inga evenemang än. Skapa det första!",
+    "when": "När",
+    "going": "Anmälda",
+    "status": "Status",
+    "draft": "Utkast",
+    "published": "Publicerat",
+    "past": "Passerat",
+    "fields": {
+      "title": "Titel",
+      "description": "Beskrivning",
+      "location": "Plats",
+      "starts_at": "Börjar",
+      "ends_at": "Slutar (valfritt)",
+      "capacity": "Max antal deltagare (valfritt)",
+      "rsvp_deadline": "Sista anmälningsdag (valfritt)",
+      "fee_amount": "Avgift (valfritt)"
+    },
+    "markdownHint": "Du kan använda Markdown: **fet**, *kursiv*, - listor, [länkar](https://…).",
+    "timezoneHint": "Tidszon: {timezone}",
+    "capacityHint": "Lämna tomt för obegränsat.",
+    "feeHint": "Lämna tomt om evenemanget är gratis. Deltagarna får betalningsuppgifter och en referens.",
+    "publishLabel": "Publicerat (syns för medlemmar, som får ett mejl första gången det publiceras)",
+    "create": "Skapa evenemang",
+    "save": "Spara ändringar",
+    "saved": "Sparat.",
+    "savedPublished": "Sparat och publicerat. Medlemmarna meddelas.",
+    "createdDraft": "Evenemanget skapades som utkast. Kryssa i ”Publicerat” när det är klart.",
+    "saveError": "Kunde inte spara. Försök igen.",
+    "invalidField": "Kontrollera fältet ”{field}”.",
+    "endBeforeStart": "Sluttiden måste vara efter starttiden.",
+    "delete": "Radera evenemang",
+    "deleteConfirm": "Radera evenemanget och alla anmälningar? Det går inte att ångra.",
+    "viewAsMember": "Visa som medlem",
+    "attendees": "Deltagare ({count})",
+    "noAttendees": "Ingen har anmält sig än.",
+    "exportCsv": "Exportera CSV",
+    "name": "Namn",
+    "signedUp": "Anmäld",
+    "payment": "Betalning",
+    "confirmPayment": "Bekräfta betald",
+    "remove": "Ta bort",
+    "removeConfirm": "Ta bort {name} från evenemanget?"
+  },
+  "AdminAnnouncements": {
+    "title": "Nyheter",
+    "new": "Ny nyhet",
+    "edit": "Redigera nyhet",
+    "empty": "Inga nyheter än.",
+    "titleField": "Titel",
+    "body": "Text",
+    "markdownHint": "Du kan använda Markdown: **fet**, *kursiv*, - listor, [länkar](https://…).",
+    "date": "Datum",
+    "status": "Status",
+    "pinned": "Fäst (visas först)",
+    "allowComments": "Tillåt kommentarer",
+    "publish": "Publicerad (syns för medlemmar)",
+    "publishNotify": "Publicerad (syns för medlemmar, som får ett mejl första gången den publiceras)",
+    "published": "Publicerad",
+    "draft": "Utkast",
+    "create": "Skapa",
+    "save": "Spara ändringar",
+    "saved": "Sparat.",
+    "invalid": "Lägg till en titel.",
+    "error": "Kunde inte spara. Försök igen.",
+    "view": "Visa",
+    "delete": "Radera",
+    "deleteConfirm": "Radera nyheten och dess kommentarer?"
+  },
+  "AdminSettings": {
+    "title": "Inställningar",
+    "intro": "Ändringar här gäller direkt.",
+    "branding": "Utseende",
+    "logo": "Logotyp",
+    "imageHint": "PNG, JPG eller WebP, max 2 MB.",
+    "removeLogo": "Ta bort logotyp",
+    "primaryColor": "Huvudfärg",
+    "accentColor": "Accentfärg",
+    "preview": "Förhandsvisning",
+    "lowContrast": "Färgen är mycket ljus, så text i den färgen kan vara svår att läsa mot vitt.",
+    "welcomeText": "Välkomsttext (startsidan)",
+    "welcomeHint": "Visas för besökare på startsidan. Markdown stöds.",
+    "save": "Spara",
+    "saved": "Sparat.",
+    "paymentDetails": "Betalningsuppgifter",
+    "paymentIntro": "Visas för godkända medlemmar på medlemssidan och vid betalda evenemang. Fyll i de ni använder.",
+    "fields": {
+      "account_holder": "Mottagarens namn",
+      "bank_name": "Bank",
+      "account_number": "Kontonummer (t.ex. clearing + konto)",
+      "iban": "IBAN",
+      "bic": "BIC / SWIFT",
+      "swish_number": "Swishnummer",
+      "instructions": "Extra instruktioner"
+    },
+    "instructionsHint": "T.ex. ”Skriv din betalningsreferens i meddelandet.” Markdown stöds.",
+    "qr": "QR-kod för betalning (t.ex. Swish-QR)",
+    "removeQr": "Ta bort QR-kod",
+    "privacyTitle": "Integritetspolicy",
+    "privacyIntro": "Er offentliga integritetspolicy. Granska den, och publicera en ny version när er hantering ändras.",
+    "editPrivacy": "Redigera integritetspolicy",
+    "configHint": "Gemenskapens namn, språk, medlemsavgift och funktioner ställs in i community.config.ts (se README).",
+    "errors": {
+      "color": "Välj giltiga färger (t.ex. #4f46e5).",
+      "welcome": "Välkomsttexten är för lång.",
+      "imageType": "Bilder måste vara PNG, JPG eller WebP.",
+      "imageSize": "Bilder får vara högst 2 MB.",
+      "uploadFailed": "Uppladdningen misslyckades. Försök igen.",
+      "save": "Kunde inte spara. Försök igen."
+    },
+    "privacy": {
+      "intro": "När du publicerar skapas en ny version. Medlemmarna får en uppmaning att läsa den uppdaterade policyn.",
+      "defaultWarning": "Ni använder fortfarande standardtexten. Granska den och anpassa den till er gemenskap innan ni bjuder in medlemmar.",
+      "notLegalAdvice": "Standardtexten är en utgångspunkt, inte juridisk rådgivning. Kontrollera vad som gäller för er.",
+      "write": "Skriv",
+      "preview": "Förhandsvisa",
+      "placeholders": "'{{community}}', '{{contactEmail}}' och '{{siteUrl}}' fylls i automatiskt.",
+      "publish": "Publicera ny version",
+      "publishConfirm": "Publicera en ny version av integritetspolicyn? Medlemmarna ombeds läsa den.",
+      "published": "Version {version} publicerad.",
+      "empty": "Alla språk behöver text.",
+      "history": "Versionshistorik",
+      "default": "standardtext"
+    }
+  },
+  "Setup": {
+    "title": "Installationskoll",
+    "intro": "Kontrollerar att plattformen är rätt konfigurerad. Åtgärda allt som är rött; gult är rekommendationer.",
+    "summaryOk": "Allt viktigt är konfigurerat. 🎉",
+    "summaryFail": "{count, plural, one {# problem behöver} other {# problem behöver}} åtgärdas.",
+    "status": { "ok": "OK", "warn": "Kolla", "fail": "Åtgärda" },
+    "manual": "Kontrolleras inte automatiskt: i Supabase → Authentication → URL Configuration måste Site URL vara er webbplats adress, och e-postmallarna måste vara de från README.",
+    "checks": {
+      "env": {
+        "title": "Miljövariabler",
+        "fix": "Lägg till de saknade variablerna i Vercel → Settings → Environment Variables och gör en ny deploy."
+      },
+      "database": {
+        "title": "Databas",
+        "fix": "Kör supabase/setup.sql i Supabase SQL-editor (nya projekt) eller de nya migreringarna (uppdateringar). Se docs/UPGRADING.md."
+      },
+      "storage": {
+        "title": "Fillagring (logotyp och QR-kod)",
+        "fix": "Lagringsytan \"branding\" saknas. Kör supabase/setup.sql."
+      },
+      "admins": {
+        "title": "Minst en admin",
+        "fix": "Lägg din e-postadress i ADMIN_EMAILS och logga in."
+      },
+      "logo": {
+        "title": "Logotyp uppladdad",
+        "fix": "Ladda upp en logotyp under Admin → Inställningar."
+      },
+      "payment": {
+        "title": "Betalningsuppgifter",
+        "fix": "Ni tar ut en medlemsavgift, så lägg till hur man betalar under Admin → Inställningar."
+      },
+      "privacy": {
+        "title": "Integritetspolicy granskad",
+        "fix": "Granska standardpolicyn och publicera er egen version under Admin → Inställningar → Integritetspolicy."
+      },
+      "smtp": {
+        "title": "E-postutskick (SMTP)",
+        "fix": "Kontrollera SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS och SMTP_FROM. De måste stämma med er e-postleverantör."
+      },
+      "siteUrl": {
+        "title": "Webbadress",
+        "fix": "NEXT_PUBLIC_SITE_URL ska vara adressen du besöker nu. Uppdatera den i Vercel, och Site URL i Supabase."
+      },
+      "cron": {
+        "title": "Dagligt jobb (påminnelser)",
+        "fix": "Sätt CRON_SECRET i Vercel så att påminnelser skickas och ert gratis Supabase-projekt hålls aktivt."
+      },
+      "config": {
+        "title": "Uppgifter om gemenskapen",
+        "fix": "Ändra namn och kontaktadress i community.config.ts."
+      }
+    }
+  },
+  "Email": {
+    "privacyLink": "Integritetspolicy",
+    "footerAdmin": "Du får det här mejlet eftersom du är admin.",
+    "footerMember": "Du får det här mejlet eftersom du har ett konto.",
+    "footerPreferences": "Du kan stänga av de här mejlen på din profilsida.",
+    "joinRequest": {
+      "subject": "Ny medlemsansökan: {name}",
+      "heading": "Ny medlemsansökan",
+      "body": "{name} ({email}) vill bli medlem och har bekräftat sin e-postadress.",
+      "cta": "Granska ansökan"
+    },
+    "approved": {
+      "subject": "Välkommen till {community}!",
+      "heading": "Du är med! 🎉",
+      "body": "Ditt medlemskap i {community} har godkänts. Logga in för att se kommande evenemang och dina medlemsuppgifter.",
+      "cta": "Logga in"
+    },
+    "rejected": {
+      "subject": "Din ansökan till {community}",
+      "heading": "Angående din medlemsansökan",
+      "body": "Tack för ditt intresse för {community}. Tyvärr kan vi inte godkänna din ansökan just nu. Har du frågor, kontakta {contact}."
+    },
+    "newEvent": {
+      "subject": "Nytt evenemang: {title}",
+      "body": "Ett nytt evenemang har publicerats i {community}:",
+      "cta": "Se evenemanget och anmäl dig"
+    },
+    "newAnnouncement": {
+      "subject": "Nyhet: {title}",
+      "cta": "Läs mer"
+    },
+    "reminder": {
+      "subject": "Påminnelse: {title}",
+      "heading": "Vi ses snart på {title}",
+      "body": "Du är anmäld. Om du inte kan komma, avboka gärna så att någon annan kan få platsen.",
+      "cta": "Detaljer om evenemanget"
+    }
+  }
+}

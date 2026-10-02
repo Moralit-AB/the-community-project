@@ -1,0 +1,539 @@
+{
+  "Common": {
+    "copy": "Copy",
+    "copied": "Copied!",
+    "notFound": "Page not found",
+    "goHome": "Go to the start page",
+    "errorTitle": "Something went wrong",
+    "errorBody": "Please try again. If it keeps happening, contact an admin.",
+    "tryAgain": "Try again"
+  },
+  "Nav": {
+    "home": "Home",
+    "events": "Events",
+    "announcements": "News",
+    "membership": "Membership",
+    "profile": "Profile",
+    "admin": "Admin",
+    "login": "Log in",
+    "join": "Join",
+    "logout": "Log out"
+  },
+  "Footer": {
+    "privacy": "Privacy policy",
+    "poweredBy": "Powered by The Community Project"
+  },
+  "Landing": {
+    "join": "Request membership",
+    "login": "Log in",
+    "features": {
+      "events": { "title": "Events", "body": "See what's coming up and sign up with one click." },
+      "membership": { "title": "Membership", "body": "Everything about your membership and fee in one place." },
+      "news": { "title": "News", "body": "Stay in the loop with announcements from the organisers." }
+    }
+  },
+  "Auth": {
+    "loginTitle": "Log in",
+    "loginIntro": "Enter your email and we'll send you a login link. No password needed.",
+    "joinTitle": "Join {community}",
+    "joinIntro": "Fill in the form and confirm your email address to become a member.",
+    "joinIntroApproval": "Fill in the form and confirm your email address. An admin will then review your request.",
+    "joinFee": "Membership costs {amount} per {period}. You'll find the payment details once you're approved.",
+    "joinMessagePrompt": "Tell us a little about yourself and why you'd like to join",
+    "periods": {
+      "year": "year",
+      "half-year": "half year",
+      "quarter": "quarter",
+      "month": "month",
+      "none": "period"
+    },
+    "email": "Email address",
+    "name": "Your name",
+    "nameHint": "Shown to other members.",
+    "optional": "optional",
+    "privacyConsent": "I have read the <link>privacy policy</link> and agree that my information is used as described there.",
+    "sendLink": "Send login link",
+    "sending": "Sending…",
+    "requestMembership": "Request membership",
+    "notMember": "Not a member yet?",
+    "alreadyMember": "Already a member?",
+    "login": "Log in",
+    "checkEmailTitle": "Check your inbox",
+    "checkEmail": "If there is an account for this address, we've sent a login link to",
+    "checkEmailJoin": "We've sent a link to confirm your email address to",
+    "codeLabel": "Or enter the code from the email",
+    "codeHint": "Useful if you opened the email on another device.",
+    "verify": "Log in with code",
+    "verifying": "Checking…",
+    "useAnotherEmail": "Use a different email address",
+    "errors": {
+      "invalidEmail": "Please enter a valid email address.",
+      "nameRequired": "Please enter your name.",
+      "messageRequired": "Please write a short message.",
+      "privacyRequired": "Please confirm that you have read the privacy policy.",
+      "invalidCode": "That code didn't work. Check it, or request a new link.",
+      "rateLimited": "Too many attempts. Please wait a minute and try again.",
+      "generic": "Something went wrong sending the email. Please try again later.",
+      "linkExpired": "That login link has expired or was already used. Request a new one below."
+    }
+  },
+  "Pending": {
+    "pending": {
+      "title": "Thanks, {name}!",
+      "body": "Your request to join {community} has been received, and your email address is confirmed.",
+      "next": "An admin will review your request. You'll get an email when you've been approved."
+    },
+    "rejected": {
+      "title": "Your request was not approved",
+      "body": "Unfortunately your request to join {community} was not approved."
+    },
+    "suspended": {
+      "title": "Your membership is paused",
+      "body": "Your membership in {community} is currently suspended."
+    },
+    "approved": {
+      "title": "Welcome, {name}!",
+      "body": "You're a member of {community}."
+    },
+    "contact": "Questions? Contact"
+  },
+  "Privacy": {
+    "title": "Privacy policy",
+    "updated": "Last updated {date} (version {version})",
+    "missing": "The privacy policy has not been published yet.",
+    "bannerNew": "Please read our privacy policy.",
+    "bannerUpdated": "We have updated our privacy policy.",
+    "readPolicy": "Read it here",
+    "acknowledge": "Got it"
+  },
+  "Home": {
+    "greeting": "Hi {name}!",
+    "membershipPeriod": "Membership fee {period}",
+    "payNow": "How to pay",
+    "upcomingEvents": "Upcoming events",
+    "latestNews": "Latest news",
+    "seeAll": "See all",
+    "youreGoing": "You're going",
+    "noEvents": "No upcoming events right now.",
+    "noNews": "No news yet.",
+    "pinned": "Pinned",
+    "adminHint": "You're an admin: manage members, events and settings under Admin."
+  },
+  "Payment": {
+    "amount": "Amount",
+    "reference": "Payment reference",
+    "swish": "Swish",
+    "accountHolder": "Recipient",
+    "bank": "Bank",
+    "accountNumber": "Account number",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "qrAlt": "QR code for payment",
+    "iHavePaid": "I've paid",
+    "iHavePaidHint": "Let the admins know so they can confirm your payment.",
+    "reportedInfo": "Thanks! You've reported this as paid. An admin will confirm it soon.",
+    "periods": {
+      "year": "year",
+      "half-year": "half year",
+      "quarter": "quarter",
+      "month": "month",
+      "none": "period"
+    },
+    "status": {
+      "unpaid": "Not paid",
+      "reported": "Reported as paid",
+      "confirmed": "Paid",
+      "waived": "Waived",
+      "overdue": "Overdue"
+    }
+  },
+  "Membership": {
+    "title": "Membership",
+    "memberSince": "Member #{number} since {date}",
+    "noFeeTitle": "No membership fee",
+    "noFeeBody": "Membership is free. Welcome!",
+    "currentPeriod": "Fee for {period}",
+    "feeDescription": "The fee is {amount} per {period}, due by {due}.",
+    "paid": "Your fee for this period is paid. Thank you!",
+    "waived": "Your fee for this period has been waived.",
+    "noPaymentDetails": "The payment details haven't been added yet. Please contact {contact}.",
+    "history": "Payment history",
+    "period": "Period",
+    "status": "Status"
+  },
+  "Events": {
+    "title": "Events",
+    "intro": "Sign up for events and add them to your calendar.",
+    "upcoming": "Upcoming",
+    "past": "Past events",
+    "noUpcoming": "No upcoming events right now. Check back soon!",
+    "youreGoing": "You're going",
+    "spots": "{taken} / {capacity} places taken",
+    "goingCount": "{count, plural, =0 {No one going yet} one {# going} other {# going}}",
+    "back": "All events",
+    "draft": "Draft",
+    "noDescription": "No description.",
+    "when": "When",
+    "where": "Where",
+    "fee": "Fee",
+    "capacity": "Places",
+    "deadline": "Sign up by",
+    "addToCalendar": "Add to calendar (.ics)",
+    "rsvp": "I'm going",
+    "cancelRsvp": "Cancel my place",
+    "cancelConfirm": "Cancel your place at this event?",
+    "rsvpGoing": "See you there! You're on the list.",
+    "rsvpCancelled": "Your place has been cancelled.",
+    "rsvpError": "Something went wrong. Please try again.",
+    "full": "This event is full.",
+    "closed": "Sign-up for this event has closed.",
+    "started": "This event has already started.",
+    "payForEvent": "Pay for this event",
+    "paid": "Your payment for this event is confirmed. Thank you!",
+    "noPaymentDetails": "The payment details haven't been added yet. Please contact an admin.",
+    "whosGoing": "Who's going ({count})"
+  },
+  "Announcements": {
+    "title": "News",
+    "intro": "Announcements from the organisers.",
+    "empty": "No news yet.",
+    "pinned": "Pinned",
+    "back": "All news",
+    "draft": "Draft",
+    "comments": "Comments ({count})",
+    "formerMember": "Former member",
+    "commentDeleted": "This comment was deleted.",
+    "deleteComment": "Delete",
+    "commentPlaceholder": "Write a comment…",
+    "postComment": "Post comment",
+    "commentsClosed": "Comments are closed for this post.",
+    "commentsOff": "Comments are turned off.",
+    "commentInvalid": "Please write a comment (max 5000 characters).",
+    "commentError": "Your comment could not be posted."
+  },
+  "Profile": {
+    "title": "Your profile",
+    "displayName": "Name",
+    "displayNameHint": "Shown to other members on events and comments.",
+    "language": "Language",
+    "emailPreferences": "Email notifications",
+    "notifyEvents": "New events and event reminders",
+    "notifyAnnouncements": "New announcements",
+    "essentialEmails": "You'll always get essential emails, like login links and membership decisions.",
+    "save": "Save",
+    "saved": "Saved.",
+    "saveError": "Could not save. Please try again.",
+    "nameInvalid": "Please enter a name (max 80 characters).",
+    "yourData": "Your data",
+    "exportBody": "Download everything we store about you (your profile, payments, event sign-ups and comments) as a file.",
+    "export": "Download my data",
+    "deleteTitle": "Delete account",
+    "deleteBody": "This permanently deletes your account and personal data. Your comments will be shown as from a \"former member\". This cannot be undone.",
+    "deleteConfirmLabel": "Type your email address ({email}) to confirm",
+    "deleteConfirmDialog": "Permanently delete your account?",
+    "deleteConfirmMismatch": "The email address doesn't match.",
+    "deleteButton": "Delete my account",
+    "deleteLastAdmin": "You're the only admin. Make someone else an admin before deleting your account.",
+    "deleteError": "Your account could not be deleted. Please contact an admin."
+  },
+  "AdminNav": {
+    "overview": "Overview",
+    "members": "Members",
+    "events": "Events",
+    "announcements": "News",
+    "settings": "Settings",
+    "setup": "Setup check"
+  },
+  "AdminOverview": {
+    "title": "Admin",
+    "intro": "Manage your community.",
+    "pending": "Membership requests waiting",
+    "members": "Members",
+    "upcomingEvents": "Upcoming events",
+    "unpaid": "Unpaid fees {period} ({reported} reported)",
+    "setupHint": "Setting up? The <link>setup check</link> shows whether everything is configured correctly."
+  },
+  "AdminMembers": {
+    "title": "Members",
+    "exportCsv": "Export CSV",
+    "search": "Search name or email",
+    "tabs": {
+      "pending": "Requests",
+      "approved": "Members",
+      "suspended": "Suspended",
+      "rejected": "Rejected"
+    },
+    "empty": {
+      "pending": "No membership requests waiting. 🎉",
+      "approved": "No members found.",
+      "suspended": "No suspended members.",
+      "rejected": "No rejected requests."
+    },
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "fee": "Fee {period}",
+    "since": "Member since",
+    "applied": "Applied",
+    "admin": "Admin",
+    "memberNumber": "Member number",
+    "privacyAccepted": "Privacy policy accepted",
+    "approve": "Approve",
+    "reject": "Reject",
+    "rejectConfirm": "Reject {name}'s request? They will get an email.",
+    "reactivate": "Reactivate",
+    "suspend": "Suspend",
+    "suspendConfirm": "Suspend {name}? They won't be able to use the platform until reactivated.",
+    "makeAdmin": "Make admin",
+    "makeAdminConfirm": "Make {name} an admin? Admins can manage all members, events and settings.",
+    "removeAdmin": "Remove admin",
+    "removeAdminConfirm": "Remove admin rights from {name}?",
+    "delete": "Delete",
+    "deleteConfirm": "Permanently delete {name} and all their data? This cannot be undone.",
+    "deleteSelf": "You can't delete yourself here. Use your profile page.",
+    "manage": "Manage",
+    "confirm": "Confirm paid",
+    "waive": "Waive",
+    "markPaid": "Mark as paid",
+    "markUnpaid": "Mark unpaid",
+    "payments": "Membership fees",
+    "noPaymentYet": "No fee record for {period} yet (the member hasn't opened their membership page).",
+    "period": "Period",
+    "status": "Status",
+    "events": "Signed up for",
+    "reportedBanner": "{count, plural, one {# member has} other {# members have}} reported paying the {period} fee.",
+    "confirmAll": "Confirm all reported",
+    "confirmAllPrompt": "Confirm {count} reported payments? Make sure you've checked them against your bank first.",
+    "confirmedCount": "{count, plural, one {# payment} other {# payments}} confirmed.",
+    "statusChanged": {
+      "approved": "Approved. They've been sent an email.",
+      "rejected": "Request rejected.",
+      "suspended": "Member suspended.",
+      "pending": "Status updated."
+    },
+    "madeAdmin": "They are now an admin.",
+    "removedAdmin": "Admin rights removed.",
+    "lastAdmin": "The community needs at least one admin. Make someone else an admin first.",
+    "error": "Something went wrong. Please try again."
+  },
+  "AdminEvents": {
+    "title": "Events",
+    "new": "New event",
+    "edit": "Edit event",
+    "empty": "No events yet. Create your first one!",
+    "when": "When",
+    "going": "Going",
+    "status": "Status",
+    "draft": "Draft",
+    "published": "Published",
+    "past": "Past",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "location": "Location",
+      "starts_at": "Starts",
+      "ends_at": "Ends (optional)",
+      "capacity": "Max participants (optional)",
+      "rsvp_deadline": "Sign-up deadline (optional)",
+      "fee_amount": "Fee (optional)"
+    },
+    "markdownHint": "You can use Markdown: **bold**, *italic*, - lists, [links](https://…).",
+    "timezoneHint": "Time zone: {timezone}",
+    "capacityHint": "Leave empty for unlimited.",
+    "feeHint": "Leave empty if the event is free. Attendees get payment details and a reference.",
+    "publishLabel": "Published (visible to members, who are emailed about it the first time it's published)",
+    "create": "Create event",
+    "save": "Save changes",
+    "saved": "Saved.",
+    "savedPublished": "Saved and published. Members are being notified.",
+    "createdDraft": "Event created as a draft. Tick “Published” when it's ready.",
+    "saveError": "Could not save. Please try again.",
+    "invalidField": "Please check the field “{field}”.",
+    "endBeforeStart": "The end time must be after the start time.",
+    "delete": "Delete event",
+    "deleteConfirm": "Delete this event and all sign-ups? This cannot be undone.",
+    "viewAsMember": "View as member",
+    "attendees": "Attendees ({count})",
+    "noAttendees": "No one has signed up yet.",
+    "exportCsv": "Export CSV",
+    "name": "Name",
+    "signedUp": "Signed up",
+    "payment": "Payment",
+    "confirmPayment": "Confirm paid",
+    "remove": "Remove",
+    "removeConfirm": "Remove {name} from this event?"
+  },
+  "AdminAnnouncements": {
+    "title": "News",
+    "new": "New announcement",
+    "edit": "Edit announcement",
+    "empty": "No announcements yet.",
+    "titleField": "Title",
+    "body": "Text",
+    "markdownHint": "You can use Markdown: **bold**, *italic*, - lists, [links](https://…).",
+    "date": "Date",
+    "status": "Status",
+    "pinned": "Pinned (shown first)",
+    "allowComments": "Allow comments",
+    "publish": "Published (visible to members)",
+    "publishNotify": "Published (visible to members, who are emailed the first time it's published)",
+    "published": "Published",
+    "draft": "Draft",
+    "create": "Create",
+    "save": "Save changes",
+    "saved": "Saved.",
+    "invalid": "Please add a title.",
+    "error": "Could not save. Please try again.",
+    "view": "View",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this announcement and its comments?"
+  },
+  "AdminSettings": {
+    "title": "Settings",
+    "intro": "Changes here take effect immediately.",
+    "branding": "Look and feel",
+    "logo": "Logo",
+    "imageHint": "PNG, JPG or WebP, max 2 MB.",
+    "removeLogo": "Remove logo",
+    "primaryColor": "Main color",
+    "accentColor": "Accent color",
+    "preview": "Preview",
+    "lowContrast": "This color is very light, so text in this color may be hard to read on white.",
+    "welcomeText": "Welcome text (start page)",
+    "welcomeHint": "Shown to visitors on the start page. Markdown is supported.",
+    "save": "Save",
+    "saved": "Saved.",
+    "paymentDetails": "Payment details",
+    "paymentIntro": "Shown to approved members on the membership page and for paid events. Fill in the ones you use.",
+    "fields": {
+      "account_holder": "Recipient name",
+      "bank_name": "Bank",
+      "account_number": "Account number (e.g. clearing + account)",
+      "iban": "IBAN",
+      "bic": "BIC / SWIFT",
+      "swish_number": "Swish number",
+      "instructions": "Extra instructions"
+    },
+    "instructionsHint": "E.g. “Write your payment reference in the message.” Markdown is supported.",
+    "qr": "Payment QR code (e.g. Swish QR)",
+    "removeQr": "Remove QR code",
+    "privacyTitle": "Privacy policy",
+    "privacyIntro": "Your public privacy policy. Review it, and publish a new version whenever your practices change.",
+    "editPrivacy": "Edit privacy policy",
+    "configHint": "The community name, languages, membership fee and features are set in community.config.ts (see the README).",
+    "errors": {
+      "color": "Please pick valid colors (like #4f46e5).",
+      "welcome": "The welcome text is too long.",
+      "imageType": "Images must be PNG, JPG or WebP.",
+      "imageSize": "Images can be at most 2 MB.",
+      "uploadFailed": "The upload failed. Please try again.",
+      "save": "Could not save. Please try again."
+    },
+    "privacy": {
+      "intro": "Publishing creates a new version. Members will see a notice to read the updated policy.",
+      "defaultWarning": "You're still using the default policy text. Review it and adapt it to your community before you invite members.",
+      "notLegalAdvice": "The default text is a starting point, not legal advice. Check what applies to your community.",
+      "write": "Write",
+      "preview": "Preview",
+      "placeholders": "'{{community}}', '{{contactEmail}}' and '{{siteUrl}}' are filled in automatically.",
+      "publish": "Publish new version",
+      "publishConfirm": "Publish a new version of the privacy policy? Members will be asked to read it.",
+      "published": "Version {version} published.",
+      "empty": "Every language needs text.",
+      "history": "Version history",
+      "default": "default text"
+    }
+  },
+  "Setup": {
+    "title": "Setup check",
+    "intro": "Checks that your platform is configured correctly. Fix anything red; yellow items are recommendations.",
+    "summaryOk": "Everything essential is configured. 🎉",
+    "summaryFail": "{count, plural, one {# problem needs} other {# problems need}} fixing.",
+    "status": { "ok": "OK", "warn": "Check", "fail": "Fix" },
+    "manual": "Not checked automatically: in Supabase → Authentication → URL Configuration, the Site URL must be your site's address, and the email templates must be the ones from the README.",
+    "checks": {
+      "env": {
+        "title": "Environment variables",
+        "fix": "Add the missing variables in Vercel → Settings → Environment Variables, then redeploy."
+      },
+      "database": {
+        "title": "Database",
+        "fix": "Run supabase/setup.sql in the Supabase SQL editor (new projects), or the new migrations (updates). See docs/UPGRADING.md."
+      },
+      "storage": {
+        "title": "File storage (logo and QR code)",
+        "fix": "The \"branding\" storage bucket is missing. Run supabase/setup.sql."
+      },
+      "admins": {
+        "title": "At least one admin",
+        "fix": "Put your email in ADMIN_EMAILS and log in."
+      },
+      "logo": {
+        "title": "Logo uploaded",
+        "fix": "Upload a logo under Admin → Settings."
+      },
+      "payment": {
+        "title": "Payment details",
+        "fix": "You charge a membership fee, so add how to pay under Admin → Settings."
+      },
+      "privacy": {
+        "title": "Privacy policy reviewed",
+        "fix": "Review the default privacy policy and publish your own version under Admin → Settings → Privacy policy."
+      },
+      "smtp": {
+        "title": "Email sending (SMTP)",
+        "fix": "Check SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS and SMTP_FROM. They must match your email provider."
+      },
+      "siteUrl": {
+        "title": "Site URL",
+        "fix": "NEXT_PUBLIC_SITE_URL should be the address you're visiting now. Update it in Vercel, and the Site URL in Supabase."
+      },
+      "cron": {
+        "title": "Daily job (event reminders)",
+        "fix": "Set CRON_SECRET in Vercel so reminders are sent and your free Supabase project stays active."
+      },
+      "config": {
+        "title": "Community details",
+        "fix": "Change the name and contact email in community.config.ts."
+      }
+    }
+  },
+  "Email": {
+    "privacyLink": "Privacy policy",
+    "footerAdmin": "You get this email because you're an admin.",
+    "footerMember": "You get this email because you have an account.",
+    "footerPreferences": "You can turn these emails off on your profile page.",
+    "joinRequest": {
+      "subject": "New membership request: {name}",
+      "heading": "New membership request",
+      "body": "{name} ({email}) wants to join and has confirmed their email address.",
+      "cta": "Review request"
+    },
+    "approved": {
+      "subject": "Welcome to {community}!",
+      "heading": "You're in! 🎉",
+      "body": "Your membership in {community} has been approved. Log in to see upcoming events and your membership details.",
+      "cta": "Log in"
+    },
+    "rejected": {
+      "subject": "Your request to join {community}",
+      "heading": "About your membership request",
+      "body": "Thank you for your interest in {community}. Unfortunately we can't approve your request right now. If you have questions, contact {contact}."
+    },
+    "newEvent": {
+      "subject": "New event: {title}",
+      "body": "A new event has been published in {community}:",
+      "cta": "See the event and sign up"
+    },
+    "newAnnouncement": {
+      "subject": "News: {title}",
+      "cta": "Read more"
+    },
+    "reminder": {
+      "subject": "Reminder: {title}",
+      "heading": "See you soon at {title}",
+      "body": "You're signed up. If you can't come, please cancel your place so someone else can have it.",
+      "cta": "Event details"
+    }
+  }
+}
