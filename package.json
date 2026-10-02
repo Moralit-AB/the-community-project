@@ -6,22 +6,55 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "setup:local": "tsx scripts/setup-local.ts",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:test": "supabase test db",
+    "db:new": "supabase migration new",
+    "db:setup-sql": "tsx scripts/build-setup-sql.ts",
+    "db:types": "supabase gen types typescript --local > lib/database.types.ts",
+    "check:secrets": "node scripts/check-secrets.mjs --all",
+    "prepare": "lefthook install || true"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.2",
     "next": "16.3.8",
+    "next-intl": "^4.14.9",
+    "nodemailer": "^10.0.13",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^22.20.5",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
+    "lefthook": "^2.1.16",
+    "prettier": "^3.9.9",
+    "supabase": "^2.119.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.3"
+  },
+  "description": "An open-source, configure-only community platform: memberships, events, announcements. Next.js + Supabase + Vercel.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.9"
   }
 }

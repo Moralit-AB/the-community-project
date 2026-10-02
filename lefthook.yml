@@ -1,0 +1,6 @@
+# Git hooks, installed automatically by `npm install` (see "prepare" in package.json).
+# https://lefthook.dev/configuration/
+pre-commit:
+  jobs:
+    - name: secret-scan
+      run: node scripts/check-secrets.mjs
