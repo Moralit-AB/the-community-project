@@ -59,6 +59,7 @@ supabase/
 scripts/                # setup-local, build-setup-sql, check-secrets
 e2e/                    # Playwright flows (real magic links via the Mailpit API)
 docs/                   # CONFIGURATION, UPGRADING, TROUBLESHOOTING, screenshots/
+public/brand/           # The Community Project mark (svg/png): default logo; app/icon.svg, favicon.ico, apple-icon.png and public/icons/ derive from it
 .github/workflows/      # ci.yml (checks, secret scan, e2e on PRs); template-sync.yml (updates for copies)
 ```
 

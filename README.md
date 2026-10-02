@@ -1,3 +1,5 @@
+<p align="center"><img src="public/brand/mark.png" alt="The Community Project" width="90"></p>
+
 # The Community Project
 
 **A free, open-source home for your community, run on your own accounts so you own the data.**

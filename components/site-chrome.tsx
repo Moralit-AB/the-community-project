@@ -15,9 +15,9 @@ export async function Brand() {
         // eslint-disable-next-line @next/next/no-img-element
         <img src={settings.logoUrl} alt="" className="h-9 w-auto max-w-[120px] object-contain" />
       ) : (
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-fg">
-          {config.name.slice(0, 1).toUpperCase()}
-        </span>
+        // Default mark of The Community Project, until an admin uploads a logo.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src="/brand/mark.svg" alt="" className="h-9 w-auto dark:invert" />
       )}
       <span className="truncate">{config.name}</span>
     </Link>
@@ -74,7 +74,11 @@ export async function SiteFooter() {
           </a>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs">{t("poweredBy")}</span>
+          <span className="flex items-center gap-1.5 text-xs">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/mark.svg" alt="" className="h-4 w-auto opacity-60 dark:invert" />
+            {t("poweredBy")}
+          </span>
           <LocaleSwitcher key={locale} locales={config.locales} />
         </div>
       </div>

@@ -26,7 +26,7 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 ## Open decisions and known issues
 - **Upstream repo URL:** needed for the README's "Use this template" and Deploy-button links. Placeholder: `<OWNER>/the-community-project`.
 - **Changing your email address:** not supported in the UI in v1. An admin can change it in the Supabase dashboard (the `profiles.email` sync trigger handles it).
-- **App icon:** generated from the community's initial and the config's primary color. It doesn't use the uploaded logo yet.
+- **Icons:** the browser-tab, home-screen and fallback-header icons are The Community Project's mark (`public/brand/`, `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png`, `public/icons/`). A logo uploaded in Admin → Settings replaces the mark in the header, but not in the browser tab or home-screen icon yet (a possible v2 feature). `app/icon.svg` is the provided SVG as-is. Its 9th dot is white, which shows up as an extra dot on dark browser tab bars.
 - **Payment QR code:** stored in the public `branding` bucket, so anyone with the URL can see it. That's acceptable for a payment QR code.
 
 ## How to verify
@@ -38,6 +38,8 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 - `npm run check:secrets`.
 
 ## Session log (newest first)
+### 2026-10-02 (branding)
+- Replaced the generated letter icon with The Community Project mark: SVG favicon, `.ico` fallback, Apple touch icon, manifest icons (192, 512 and maskable 512), and the fallback logo in the header and footer (inverted in dark mode). Raster icons are made from the provided PNG with ImageMagick.
 ### 2026-10-02 (phase 9)
 - README, written step by step for non-developers: costs and limits, Supabase, Resend/SMTP, email templates, config, Vercel, URL configuration, first admin, custom domain, "Am I done?" checklist, local try-out, troubleshooting.
 - docs/: CONFIGURATION, UPGRADING (template-sync workflow plus manual path, database migration steps), TROUBLESHOOTING, screenshots.

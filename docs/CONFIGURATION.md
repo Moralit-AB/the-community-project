@@ -64,7 +64,7 @@ The daily job runs at 07:00 UTC (see `vercel.json`). It sends reminders for even
 
 ## Admin → Settings
 
-- **Logo:** PNG, JPG or WebP, max 2 MB. A wide logo with a transparent background looks best.
+- **Logo:** PNG, JPG or WebP, max 2 MB. A wide logo with a transparent background looks best. Until you upload one, the header shows The Community Project's mark. The browser-tab and home-screen icons always use the mark. To use your own, replace `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png` and the files in `public/icons/` with your versions, keeping the same file names and sizes.
 - **Colours:**
   - Main colour: buttons, links and highlights.
   - Accent colour: highlights such as the "Pinned" label.
