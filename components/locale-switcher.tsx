@@ -3,8 +3,7 @@
 import { useLocale } from "next-intl";
 import { useTransition } from "react";
 import { setLocale } from "@/lib/actions/locale";
-
-const NAMES: Record<string, string> = { en: "English", sv: "Svenska" };
+import { LANGUAGE_NAMES } from "@/lib/config-schema";
 
 export function LocaleSwitcher({ locales }: { locales: string[] }) {
   const current = useLocale();
@@ -20,7 +19,7 @@ export function LocaleSwitcher({ locales }: { locales: string[] }) {
     >
       {locales.map((l) => (
         <option key={l} value={l}>
-          {NAMES[l] ?? l}
+          {LANGUAGE_NAMES[l as keyof typeof LANGUAGE_NAMES] ?? l}
         </option>
       ))}
     </select>

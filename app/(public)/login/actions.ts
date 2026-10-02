@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { config } from "@/lib/config";
+import { serverEnv } from "@/lib/env";
 import { publicEnv } from "@/lib/env-public";
 import { afterLogin, NEXT_COOKIE, safeNextPath } from "@/lib/post-login";
 import { getPrivacyPolicy } from "@/lib/settings";
@@ -36,7 +37,12 @@ export async function requestLogin(_: AuthStep, formData: FormData): Promise<Aut
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithOtp({
     email: email.data,
-    options: { shouldCreateUser: false, emailRedirectTo: `${publicEnv.siteUrl}/auth/confirm` },
+    options: {
+      // Only ADMIN_EMAILS may create an account from the login page, so the very first admin
+      // can simply "log in". Everyone else must request membership on /join.
+      shouldCreateUser: serverEnv.adminEmails.includes(email.data),
+      emailRedirectTo: `${publicEnv.siteUrl}/auth/confirm`,
+    },
   });
   // Unknown addresses get the same answer as known ones, so nobody can probe who is a member.
   if (error && !(error.code === "otp_disabled" || /signups not allowed/i.test(error.message))) {

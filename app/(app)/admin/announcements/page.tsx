@@ -44,7 +44,7 @@ export default async function AdminAnnouncementsPage() {
                   </Link>
                   {p.pinned && (
                     <span className="ml-2">
-                      <Badge tone="brand">{t("pinned")}</Badge>
+                      <Badge tone="accent">{t("pinned")}</Badge>
                     </span>
                   )}
                 </Td>

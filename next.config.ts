@@ -4,6 +4,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   reactCompiler: true,
   poweredByHeader: false,
+  devIndicators: false,
   experimental: {
     // Logo and QR code uploads go through Server Actions.
     serverActions: { bodySizeLimit: "3mb" },

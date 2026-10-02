@@ -111,6 +111,7 @@ const tones = {
   warning: "bg-amber-50 text-amber-900 border-amber-200 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-900",
   danger: "bg-red-50 text-red-800 border-red-200 dark:bg-red-950 dark:text-red-200 dark:border-red-900",
   brand: "bg-primary/10 text-primary border-primary/30",
+  accent: "bg-accent text-accent-fg border-accent",
 };
 export type Tone = keyof typeof tones;
 

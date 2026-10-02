@@ -1,12 +1,12 @@
 import type { CommunityConfig } from "./config-schema";
-import { zonedParts } from "./time";
+import { zonedLocalToUtc, zonedParts } from "./time";
 
 type FeeConfig = CommunityConfig["membership"]["fee"];
 
 export type Period = {
   /** Stable identifier stored in the database and used in payment references, e.g. "2026", "2026-H2", "2026-03". */
   key: string;
-  /** First day of the period (UTC midnight of the date in the community's timezone). */
+  /** Midnight (community timezone) on the first day of the period. */
   start: Date;
   /** First day of the next period. */
   end: Date;
@@ -27,9 +27,14 @@ export function currentPeriod(fee: FeeConfig, timeZone: string, now: Date = new 
   const index = Math.floor(offset / len);
 
   const startMonth0 = fee.periodStartMonth - 1 + index * len; // may be >= 12
-  const start = new Date(Date.UTC(anchorYear, startMonth0, 1));
-  const end = new Date(Date.UTC(anchorYear, startMonth0 + len, 1));
-  const due = new Date(start.getTime() + fee.graceDays * 86_400_000);
+  // Calendar arithmetic in UTC, then each date is anchored to local midnight in the community's timezone.
+  const startDay = new Date(Date.UTC(anchorYear, startMonth0, 1));
+  const endDay = new Date(Date.UTC(anchorYear, startMonth0 + len, 1));
+  const dueDay = new Date(startDay.getTime() + fee.graceDays * 86_400_000);
+  const localMidnight = (d: Date) => zonedLocalToUtc(`${d.toISOString().slice(0, 10)}T00:00`, timeZone);
+  const start = localMidnight(startDay);
+  const end = localMidnight(endDay);
+  const due = localMidnight(dueDay);
 
   let key: string;
   switch (fee.period) {
@@ -43,7 +48,7 @@ export function currentPeriod(fee: FeeConfig, timeZone: string, now: Date = new 
       key = `${anchorYear}-Q${index + 1}`;
       break;
     case "month":
-      key = `${start.getUTCFullYear()}-${String(start.getUTCMonth() + 1).padStart(2, "0")}`;
+      key = `${startDay.getUTCFullYear()}-${String(startDay.getUTCMonth() + 1).padStart(2, "0")}`;
       break;
   }
   return { key, start, end, due };
@@ -57,6 +62,26 @@ export function membershipReference(prefix: string, memberNumber: number, period
 /** Payment reference for an event fee, e.g. "MEM-12-E7". */
 export function eventReference(prefix: string, memberNumber: number, eventNumber: number): string {
   return `${prefix}-${memberNumber}-E${eventNumber}`.toUpperCase();
+}
+
+/**
+ * A fee is overdue once the grace period has passed: counted from the start of the period,
+ * or from when the member was approved if they joined later in the period.
+ */
+export function dueDate(period: Period, approvedAt: string | null, graceDays: number): Date {
+  const joinedDue = approvedAt ? new Date(new Date(approvedAt).getTime() + graceDays * 86_400_000) : period.due;
+  return joinedDue > period.due ? joinedDue : period.due;
+}
+
+export function isOverdue(
+  period: Period | null,
+  status: string | null | undefined,
+  approvedAt: string | null,
+  graceDays: number,
+  now: Date = new Date(),
+): boolean {
+  if (!period || status !== "unpaid") return false;
+  return now > dueDate(period, approvedAt, graceDays);
 }
 
 export type PaymentStatus = "unpaid" | "reported" | "confirmed" | "waived";

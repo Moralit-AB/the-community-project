@@ -10,12 +10,15 @@ export function ColorField({
   defaultValue,
   previewLabel,
   lowContrastLabel,
+  checkContrast = true,
 }: {
   name: string;
   label: string;
   defaultValue: string;
   previewLabel: string;
   lowContrastLabel: string;
+  /** Warn when the color is too light to read as text on white (for colors used as text). */
+  checkContrast?: boolean;
 }) {
   const [value, setValue] = useState(defaultValue);
   const valid = HEX_COLOR.test(value);
@@ -51,7 +54,9 @@ export function ColorField({
           </span>
         )}
       </div>
-      {valid && onWhite < 3 && <p className="text-xs text-amber-700 dark:text-amber-300">{lowContrastLabel}</p>}
+      {checkContrast && valid && onWhite < 3 && (
+        <p className="text-xs text-amber-700 dark:text-amber-300">{lowContrastLabel}</p>
+      )}
     </div>
   );
 }

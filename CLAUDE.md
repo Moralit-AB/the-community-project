@@ -57,7 +57,9 @@ supabase/
   templates/            # auth email templates (magic link / confirm signup)
   tests/                # pgTAP RLS tests
 scripts/                # setup-local, build-setup-sql, check-secrets
-docs/                   # CONFIGURATION, UPGRADING, TROUBLESHOOTING, CONTRIBUTING
+e2e/                    # Playwright flows (real magic links via the Mailpit API)
+docs/                   # CONFIGURATION, UPGRADING, TROUBLESHOOTING, screenshots/
+.github/workflows/      # ci.yml (checks, secret scan, e2e on PRs); template-sync.yml (updates for copies)
 ```
 
 ## Data model (see `supabase/migrations/`)
@@ -95,6 +97,7 @@ docs/                   # CONFIGURATION, UPGRADING, TROUBLESHOOTING, CONTRIBUTIN
   - Render markdown with `components/markdown.tsx`; raw HTML is disabled.
   - Escape user content in emails (`escapeHtml`).
   - Guard CSV cells against formulas (`lib/csv.ts`).
+- **ADMIN_EMAILS:** these addresses may create an account from `/login`, so the very first admin can just log in. They are promoted in `lib/post-login.ts`.
 - **Style:** keep it simple and readable. Small server components, client components only where needed for interactivity.
 
 ## Commands

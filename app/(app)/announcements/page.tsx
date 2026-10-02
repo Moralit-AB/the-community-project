@@ -36,7 +36,7 @@ export default async function AnnouncementsPage() {
               <Card className="transition hover:border-primary">
                 <div className="flex items-start justify-between gap-3">
                   <p className="text-lg font-medium">{p.title}</p>
-                  {p.pinned && <Badge tone="brand">{t("pinned")}</Badge>}
+                  {p.pinned && <Badge tone="accent">{t("pinned")}</Badge>}
                 </div>
                 <p className="text-xs text-muted">{formatDate(p.published_at!, locale, config.timezone)}</p>
                 <p className="mt-2 line-clamp-2 text-sm text-muted">{p.body.replace(/[#*_>`]/g, "")}</p>

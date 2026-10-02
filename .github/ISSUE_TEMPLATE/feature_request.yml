@@ -1,0 +1,20 @@
+name: Feature request
+description: Suggest an idea for the platform
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve for your community?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to happen?
+  - type: checkboxes
+    id: config
+    attributes:
+      label: Principles
+      options:
+        - label: This could be turned on or off with configuration, without code changes for other communities.

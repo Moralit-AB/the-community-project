@@ -1,0 +1,3 @@
+# Files the update workflow must never overwrite in your copy.
+community.config.ts
+public/**

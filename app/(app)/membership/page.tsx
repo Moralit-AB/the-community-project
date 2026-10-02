@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { requireMember } from "@/lib/auth";
 import { config, hasMembershipFee } from "@/lib/config";
+import { dueDate, isOverdue } from "@/lib/membership";
 import { getOrCreateCurrentPayment } from "@/lib/membership-server";
 import { getPaymentDetails, hasAnyPaymentDetails } from "@/lib/settings";
 import { createClient } from "@/lib/supabase/server";
@@ -28,7 +29,7 @@ export default async function MembershipPage() {
     .order("period_key", { ascending: false });
 
   const fee = config.membership.fee;
-  const overdue = payment?.status === "unpaid" && period && new Date() > period.due;
+  const overdue = isOverdue(period, payment?.status, user.profile.approved_at, config.membership.fee.graceDays);
 
   return (
     <div className="space-y-8">
@@ -53,7 +54,7 @@ export default async function MembershipPage() {
                 {t("feeDescription", {
                   amount: formatMoney(fee.amount, fee.currency, locale),
                   period: tp(`periods.${fee.period}`),
-                  due: formatDate(period.due, locale, "UTC"),
+                  due: formatDate(dueDate(period, user.profile.approved_at, fee.graceDays), locale, config.timezone),
                 })}
               </p>
             </div>

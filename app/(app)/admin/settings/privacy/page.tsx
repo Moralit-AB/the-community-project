@@ -9,8 +9,7 @@ import { MarkdownEditor } from "@/components/markdown-editor";
 import { SubmitButton } from "@/components/submit-button";
 import { Alert, Card, Field, PageHeader } from "@/components/ui";
 import { publishPrivacyPolicy } from "../actions";
-
-const LANGUAGE_NAMES: Record<string, string> = { en: "English", sv: "Svenska" };
+import { LANGUAGE_NAMES } from "@/lib/config-schema";
 
 export default async function PrivacyEditorPage() {
   const [t, locale] = await Promise.all([getTranslations("AdminSettings"), getLocale()]);
@@ -39,7 +38,7 @@ export default async function PrivacyEditorPage() {
       <Card>
         <ActionForm action={publishPrivacyPolicy} className="space-y-6">
           {config.locales.map((l) => (
-            <Field key={l} label={LANGUAGE_NAMES[l] ?? l}>
+            <Field key={l} label={LANGUAGE_NAMES[l as keyof typeof LANGUAGE_NAMES] ?? l}>
               <MarkdownEditor
                 name={`body_${l}`}
                 defaultValue={bodyFor(l)}

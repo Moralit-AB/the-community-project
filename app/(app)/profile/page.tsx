@@ -6,8 +6,7 @@ import { ActionForm } from "@/components/action-form";
 import { SubmitButton } from "@/components/submit-button";
 import { ButtonLink, Card, Checkbox, Field, Input, PageHeader, SectionTitle, Select } from "@/components/ui";
 import { deleteAccount, updateProfile } from "./actions";
-
-const LANGUAGE_NAMES: Record<string, string> = { en: "English", sv: "Svenska" };
+import { LANGUAGE_NAMES } from "@/lib/config-schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("Profile"))("title") };
@@ -31,7 +30,7 @@ export default async function ProfilePage() {
               <Select id="locale" name="locale" defaultValue={profile.locale ?? config.defaultLocale}>
                 {config.locales.map((l) => (
                   <option key={l} value={l}>
-                    {LANGUAGE_NAMES[l] ?? l}
+                    {LANGUAGE_NAMES[l as keyof typeof LANGUAGE_NAMES] ?? l}
                   </option>
                 ))}
               </Select>

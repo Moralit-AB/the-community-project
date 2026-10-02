@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import { requireMember } from "@/lib/auth";
 import { config, hasMembershipFee } from "@/lib/config";
+import { isOverdue } from "@/lib/membership";
 import { getOrCreateCurrentPayment } from "@/lib/membership-server";
 import { createClient } from "@/lib/supabase/server";
 import { formatMoney, formatRange } from "@/lib/time";
@@ -35,7 +36,7 @@ export default async function HomePage() {
     supabase.from("event_attendees").select("event_id").eq("member_id", user.id).eq("status", "going"),
   ]);
   const going = new Set((myRsvps ?? []).map((r) => r.event_id));
-  const overdue = payment?.status === "unpaid" && period && new Date() > period.due;
+  const overdue = isOverdue(period, payment?.status, user.profile.approved_at, config.membership.fee.graceDays);
 
   return (
     <div className="space-y-8">
@@ -103,7 +104,7 @@ export default async function HomePage() {
                   className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-background"
                 >
                   <span className="font-medium">{a.title}</span>
-                  {a.pinned && <Badge tone="brand">{t("pinned")}</Badge>}
+                  {a.pinned && <Badge tone="accent">{t("pinned")}</Badge>}
                 </Link>
               ))}
             </Card>

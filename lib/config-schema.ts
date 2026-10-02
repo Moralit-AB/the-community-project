@@ -7,6 +7,9 @@ const hexColor = z.string().regex(/^#[0-9a-fA-F]{6}$/, "must be a 6-digit hex co
 
 export const SUPPORTED_LOCALES = ["en", "sv"] as const;
 
+/** Each language's name in that language, for language pickers. */
+export const LANGUAGE_NAMES: Record<(typeof SUPPORTED_LOCALES)[number], string> = { en: "English", sv: "Svenska" };
+
 export const communityConfigSchema = z
   .object({
     /** Full community name, shown in the header, emails and browser tab. */

@@ -205,3 +205,25 @@ test("the last admin cannot delete their own account", async ({ page }) => {
   await page.getByRole("button", { name: "Delete my account" }).click();
   await expect(page.getByText("You're the only admin")).toBeVisible();
 });
+
+test("an address in ADMIN_EMAILS can log in the very first time and becomes admin", async ({ page }) => {
+  // founder@example.test is in ADMIN_EMAILS locally but not in the seed, like a brand-new deployment's admin.
+  await clearMailbox();
+  await page.context().clearCookies();
+  await page.goto("/login");
+  await page.getByLabel("Email address").fill("founder@example.test");
+  await page.getByRole("button", { name: "Send login link" }).click();
+  await followMagicLink(page, await waitForEmail("founder@example.test", /login link/i));
+  await expect(page).toHaveURL(/\/home$/);
+  await expect(page.getByRole("link", { name: "Admin" })).toBeVisible();
+});
+
+test("an unknown address gets the same answer but no email", async ({ page }) => {
+  await clearMailbox();
+  await page.context().clearCookies();
+  await page.goto("/login");
+  await page.getByLabel("Email address").fill("stranger@example.test");
+  await page.getByRole("button", { name: "Send login link" }).click();
+  await expect(page.getByText("Check your inbox")).toBeVisible();
+  await expect(waitForEmail("stranger@example.test", /login link/i, 3000)).rejects.toThrow();
+});

@@ -52,6 +52,7 @@ export default async function AdminSettingsPage() {
               <ColorField
                 name="accent_color"
                 label={t("accentColor")}
+                checkContrast={false}
                 defaultValue={settings.accent}
                 previewLabel={t("preview")}
                 lowContrastLabel={t("lowContrast")}

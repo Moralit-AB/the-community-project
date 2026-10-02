@@ -1,0 +1,35 @@
+# Keeps YOUR copy of The Community Project up to date.
+#
+# Once a month (or when you click "Run workflow"), this opens a pull request in your
+# repository with the latest changes from the original project. Review it, merge it,
+# and Vercel redeploys automatically. Then check docs/UPGRADING.md for any database steps.
+#
+# Setup (one time, in YOUR repository on GitHub):
+#   1. Settings → Secrets and variables → Actions → Variables → New variable:
+#        Name: UPSTREAM_REPO    Value: the original repo, e.g. <OWNER>/the-community-project
+#   2. Settings → Actions → General → Workflow permissions:
+#        tick "Allow GitHub Actions to create and approve pull requests".
+# Without UPSTREAM_REPO set, this workflow does nothing.
+name: Update from The Community Project
+
+on:
+  schedule:
+    - cron: "0 6 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    if: vars.UPSTREAM_REPO != '' && vars.UPSTREAM_REPO != github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: AndreasAugustin/actions-template-sync@v2
+        with:
+          source_repo_path: ${{ vars.UPSTREAM_REPO }}
+          upstream_branch: main
+          pr_title: "Update from The Community Project"
+          pr_labels: template-sync

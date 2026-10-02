@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import rawConfig from "@/community.config";
 import { parseCommunityConfig } from "./config-schema";
 import { csvCell, toCsv } from "./csv";
-import { currentPeriod, eventReference, membershipReference } from "./membership";
+import { currentPeriod, eventReference, isOverdue, membershipReference } from "./membership";
 import { contrastRatio, readableTextColor, safeColor, themeCss } from "./theme";
 import { formatRange, utcToZonedLocalInput, zonedLocalToUtc } from "./time";
 
@@ -32,9 +32,9 @@ describe("membership periods", () => {
   it("calendar year", () => {
     const p = currentPeriod(fee, tz, new Date("2026-03-15T12:00:00Z"))!;
     expect(p.key).toBe("2026");
-    expect(p.start.toISOString()).toBe("2026-01-01T00:00:00.000Z");
-    expect(p.end.toISOString()).toBe("2027-01-01T00:00:00.000Z");
-    expect(p.due.toISOString()).toBe("2026-01-31T00:00:00.000Z");
+    expect(p.start.toISOString()).toBe("2025-12-31T23:00:00.000Z"); // midnight in Stockholm
+    expect(p.end.toISOString()).toBe("2026-12-31T23:00:00.000Z");
+    expect(p.due.toISOString()).toBe("2026-01-30T23:00:00.000Z");
   });
 
   it("uses the community timezone at new year", () => {
@@ -56,8 +56,16 @@ describe("membership periods", () => {
     expect(currentPeriod({ ...fee, period: "month" }, tz, d)!.key).toBe("2026-08");
     const q = currentPeriod({ ...fee, period: "quarter", periodStartMonth: 11 }, tz, new Date("2027-01-05T12:00:00Z"))!;
     expect(q.key).toBe("2026-Q1");
-    expect(q.start.toISOString()).toBe("2026-11-01T00:00:00.000Z");
-    expect(q.end.toISOString()).toBe("2027-02-01T00:00:00.000Z");
+    expect(q.start.toISOString()).toBe("2026-10-31T23:00:00.000Z");
+    expect(q.end.toISOString()).toBe("2027-01-31T23:00:00.000Z");
+  });
+
+  it("overdue counts from approval for members who join mid-period", () => {
+    const p = currentPeriod(fee, tz, new Date("2026-10-02T12:00:00Z"))!;
+    const now = new Date("2026-10-02T12:00:00Z");
+    expect(isOverdue(p, "unpaid", "2026-01-05T00:00:00Z", 30, now)).toBe(true);
+    expect(isOverdue(p, "unpaid", "2026-09-20T00:00:00Z", 30, now)).toBe(false);
+    expect(isOverdue(p, "reported", "2026-01-05T00:00:00Z", 30, now)).toBe(false);
   });
 
   it("no period", () => {

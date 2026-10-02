@@ -1,0 +1,34 @@
+name: Bug report
+description: Something doesn't work as described
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! **Never paste secrets** (keys, passwords, `.env` files) or real member data here.
+        Security problems: please report privately (see SECURITY.md).
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Go to …\n2. Click …"
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where does it happen?
+      options:
+        - Locally (npm run dev)
+        - Deployed on Vercel
+        - During setup (README steps)
+  - type: textarea
+    id: setup-check
+    attributes:
+      label: Output of /admin/setup (if relevant)
+      description: Statuses only; it never shows secret values.

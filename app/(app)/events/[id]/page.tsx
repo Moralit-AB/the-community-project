@@ -58,7 +58,7 @@ export default async function EventPage({ params }: PageProps<"/events/[id]">) {
         {!event.published && <Badge tone="warning">{t("draft")}</Badge>}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-[1fr_280px]">
+      <div className="grid items-start gap-6 md:grid-cols-[1fr_280px]">
         <Card>
           {event.description ? (
             <Markdown>{event.description}</Markdown>

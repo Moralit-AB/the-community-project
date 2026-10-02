@@ -4,7 +4,7 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 **No secrets, keys, real member data or private deployment URLs in this file.** Use placeholders.
 
 ## Current status
-**Phases 1–8 implemented and tested locally. Phase 9 (README, docs, CI) is next.**
+**All build phases (0–9) are done and tested locally. Next: rehearse the README on real cloud accounts, then the user does the acceptance run.**
 
 ## Build phases
 - [x] 0. Repo hygiene: gitignore, secret scanning, CLAUDE.md, HANDOFF.md, SECURITY.md, LICENSE
@@ -16,10 +16,12 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 - [x] 6. Announcements and comments
 - [x] 7. Email: SMTP sender, templates, preferences, cron reminders
 - [x] 8. Privacy policy, profile and GDPR, setup check page, PWA manifest and icons
-- [ ] 9. Launch: README, docs, Deploy button, CI, CONTRIBUTING, issue templates
+- [x] 9. Launch: README, docs, Deploy button, CI, CONTRIBUTING, issue templates
 
 ## What's next
-- Phase 9: the step-by-step README for non-developers, docs/ (CONFIGURATION, UPGRADING, TROUBLESHOOTING, CONTRIBUTING), the CI workflow, issue templates and the Deploy button.
+1. **Publish the upstream repository** on GitHub, mark it as a template (Settings → General → "Template repository"), and replace `<OWNER>` in README.md, docs/UPGRADING.md and .github/workflows/template-sync.yml.
+2. **Rehearse the README** end to end on a fresh Supabase project, Vercel project and email provider. Fix any step that's unclear, and add dashboard screenshots where people might get stuck.
+3. **User acceptance:** copy the template privately, follow only the README, and launch the friend's community.
 
 ## Open decisions and known issues
 - **Upstream repo URL:** needed for the README's "Use this template" and Deploy-button links. Placeholder: `<OWNER>/the-community-project`.
@@ -31,11 +33,21 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 - `npm run setup:local -- --reset && npm run dev`, then open http://localhost:3000/dev/login.
 - `npm test` (Vitest: config, periods, time zones, theme, CSV, translation key parity).
 - `npm run db:test` (pgTAP: 20 RLS and security invariants).
-- `npm run e2e` (Playwright: 14 flows, including real magic links and codes through Mailpit). If port 3000 is busy, set `E2E_BASE_URL`.
+- `npm run e2e` (Playwright: 16 flows, including real magic links and codes through Mailpit). If port 3000 is busy, set `E2E_BASE_URL`.
 - `npm run lint && npm run typecheck && npm run build`.
 - `npm run check:secrets`.
 
 ## Session log (newest first)
+### 2026-10-02 (phase 9)
+- README, written step by step for non-developers: costs and limits, Supabase, Resend/SMTP, email templates, config, Vercel, URL configuration, first admin, custom domain, "Am I done?" checklist, local try-out, troubleshooting.
+- docs/: CONFIGURATION, UPGRADING (template-sync workflow plus manual path, database migration steps), TROUBLESHOOTING, screenshots.
+- CI: lint, typecheck, unit tests, `setup.sql` freshness check, build, secret scan (built-in scanner plus gitleaks over full history), pgTAP and Playwright on pull requests.
+- Fixes:
+  - The first admin can log in from `/login` (`ADMIN_EMAILS` may create an account).
+  - A fee isn't shown as overdue for members who joined mid-period.
+  - Period dates are anchored to local midnight in the community's timezone.
+  - The accent colour is used for "Pinned" badges.
+  - Language names live in one place.
 ### 2026-10-02 (cont.)
 - Built phases 1–8:
   - Database: migrations with RLS, protected profile fields, last-admin guard, RPCs for RSVP and payment reporting, storage bucket, default en/sv privacy policy.

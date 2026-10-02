@@ -44,7 +44,8 @@ const managed: Record<string, string> = {
   NEXT_PUBLIC_SUPABASE_URL: status.API_URL,
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: publishable,
   SUPABASE_SECRET_KEY: secret,
-  ADMIN_EMAILS: "admin@example.test",
+  // founder@example.test is not in the seed: it shows how the very first admin of a new deployment logs in.
+  ADMIN_EMAILS: "admin@example.test,founder@example.test",
   // Mailpit catches every email locally: http://localhost:54324
   SMTP_HOST: "127.0.0.1",
   SMTP_PORT: "54325",
