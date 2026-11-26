@@ -26,7 +26,7 @@ jobs:
     if: vars.UPSTREAM_REPO != '' && vars.UPSTREAM_REPO != github.repository
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: AndreasAugustin/actions-template-sync@v2
         with:
           source_repo_path: ${{ vars.UPSTREAM_REPO }}

@@ -39,6 +39,7 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 ### 2026-11-26 (publish)
 - Published the repo publicly at `Moralit-AB/the-community-project` and marked it as a template. Replaced the `<OWNER>` placeholders.
 - LICENSE now names Moralit AB. CI's typecheck runs `next typegen` first, because the route type helpers (`PageProps`, `LayoutProps`, `RouteContext`) didn't exist on a fresh checkout.
+- Moved to Node 26 LTS (supported until 2029-04-30): `.nvmrc`, `engines.node: 26.x` (Vercel uses it for builds and functions), `@types/node` 26, the README prerequisites, and GitHub Actions checkout, setup-node and upload-artifact v7.
 ### 2026-10-02 (branding)
 - Replaced the generated letter icon with The Community Project mark: SVG favicon, `.ico` fallback, Apple touch icon, manifest icons (192, 512 and maskable 512), and the fallback logo in the header and footer (inverted in dark mode). Raster icons are made from the provided PNG with ImageMagick.
 ### 2026-10-02 (phase 9)

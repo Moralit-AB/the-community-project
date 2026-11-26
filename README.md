@@ -313,7 +313,7 @@ Some updates include **database changes**. `docs/UPGRADING.md` lists them, and *
 
 You can run the whole platform locally with demo data before you set anything up online. You don't need any accounts for this.
 
-**You need:** [Node.js 22](https://nodejs.org) (or newer), [Docker Desktop](https://www.docker.com/products/docker-desktop/) running, and [Git](https://git-scm.com).
+**You need:** [Node.js 26](https://nodejs.org) (the current LTS version), [Docker Desktop](https://www.docker.com/products/docker-desktop/) running, and [Git](https://git-scm.com).
 
 ```bash
 git clone https://github.com/Moralit-AB/the-community-project.git
