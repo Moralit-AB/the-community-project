@@ -60,7 +60,17 @@ Nothing is charged automatically, and the platform never sees card or bank detai
 
 \*Not dangerous on their own, but keep them out of git anyway.
 
-The daily job runs at 07:00 UTC (see `vercel.json`). It sends reminders for events starting within the next 24 hours and clears old login rate-limit counters.
+The daily job runs at 07:00 UTC (see `vercel.json`). It records a heartbeat, sends reminders for events starting within the next 24 hours, and clears old login rate-limit counters.
+
+## Keeping the database awake
+
+Supabase pauses free projects after about a week with too little database activity. Members don't need to visit for this: the daily job uses the database every day.
+
+- **Built in:** the daily job records when it last ran. If that's more than 2 days ago, **Admin** shows a warning and **Admin → Setup check** shows **Daily job ran recently** in red. The usual cause is a missing or wrong `CRON_SECRET`. Vercel → your project → **Settings → Cron Jobs** shows the job and its recent runs.
+- **Optional backup:** `/api/health` is a public page that runs one tiny database read and answers `{"ok":true}`. It needs no key and shows no data. Have something open it a few times a day, for example:
+  - **GitHub (included):** in your repository, go to **Settings → Secrets and variables → Actions → Variables → New repository variable**. Name: `KEEPALIVE_URL`. Value: your site's address followed by `/api/health`, e.g. `https://my-community.vercel.app/api/health`. The *Keep database active* workflow then opens it twice a day, and GitHub emails you if it fails. GitHub pauses scheduled workflows after 60 days without activity in the repository. It emails you before it does, and merging the monthly update pull request counts as activity.
+  - **A free uptime monitor**, such as UptimeRobot or Better Stack. Add your `/api/health` address as an HTTP monitor. You also get an email if the site goes down.
+- **If it's paused anyway:** Supabase emails the account owner about a week before pausing. A paused project keeps its data. In the Supabase dashboard, open the project and click **Resume project**; this works for up to a year. Make sure the Supabase account's email address is one somebody reads.
 
 ## Admin → Settings
 

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { config, hasMembershipFee } from "@/lib/config";
+import { heartbeatAgeDays, heartbeatStatus } from "@/lib/heartbeat";
 import { currentPeriod } from "@/lib/membership";
 import { createClient } from "@/lib/supabase/server";
-import { Card, PageHeader } from "@/components/ui";
+import { Alert, Card, PageHeader } from "@/components/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("AdminOverview"))("title") };
@@ -26,7 +27,7 @@ export default async function AdminOverviewPage() {
   const supabase = await createClient();
   const period = hasMembershipFee ? currentPeriod(config.membership.fee, config.timezone) : null;
 
-  const [pending, members, upcoming, settled, reported] = await Promise.all([
+  const [pending, members, upcoming, settled, reported, heartbeat] = await Promise.all([
     supabase.from("profiles").select("id", { count: "exact", head: true }).eq("status", "pending"),
     supabase.from("profiles").select("id", { count: "exact", head: true }).eq("status", "approved"),
     supabase.from("events").select("id", { count: "exact", head: true }).gte("starts_at", new Date().toISOString()),
@@ -44,11 +45,26 @@ export default async function AdminOverviewPage() {
           .eq("period_key", period.key)
           .eq("status", "reported")
       : Promise.resolve({ count: 0 }),
+    supabase.rpc("last_heartbeat"),
   ]);
+  const lastHeartbeat = heartbeat.data;
+  const beat = heartbeatStatus(lastHeartbeat);
 
   return (
     <div className="space-y-6">
       <PageHeader title={t("title")} description={t("intro")} />
+      {beat !== "ok" && (
+        <Alert tone="warning" title={t("heartbeat.title")}>
+          {t.rich(beat === "never" ? "heartbeat.never" : "heartbeat.stale", {
+            days: lastHeartbeat ? heartbeatAgeDays(lastHeartbeat) : 0,
+            link: (c) => (
+              <Link href="/admin/setup" className="font-medium underline">
+                {c}
+              </Link>
+            ),
+          })}
+        </Alert>
+      )}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Stat label={t("pending")} value={pending.count ?? 0} href="/admin/members?status=pending" />
         <Stat label={t("members")} value={members.count ?? 0} href="/admin/members" />

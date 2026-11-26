@@ -2,7 +2,7 @@
 -- Uses the demo users from supabase/seed.sql.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(33);
+select plan(38);
 
 -- Helpers to act as a given user.
 create or replace function pg_temp.act_as(uid uuid) returns void language plpgsql as $$
@@ -126,6 +126,20 @@ select pg_temp.act_as('00000000-0000-4000-8000-000000000004');
 select throws_ok($$select public.rate_limit_hit('x', 1, 60)$$, '42501', null,
   'members cannot call the rate limiter');
 select throws_ok('select count(*) from public.rate_limits', '42501', null, 'members cannot read rate limits');
+select throws_ok('select public.heartbeat()', '42501', null, 'members cannot record a heartbeat');
+reset role;
+
+-- ─── Heartbeat (the daily job) ─────────────────────────────────────────────────
+select pg_temp.act_as_trusted();
+select isnt(public.heartbeat(), null, 'the server can record a heartbeat');
+select pg_temp.act_as('00000000-0000-4000-8000-000000000004');
+select is(public.last_heartbeat(), null, 'members cannot see the last heartbeat');
+reset role;
+select pg_temp.act_as('00000000-0000-4000-8000-000000000001');
+select is(public.last_heartbeat(), now(), 'admins see when the daily job last ran');
+reset role;
+select pg_temp.act_as_anon();
+select throws_ok('select public.last_heartbeat()', '42501', null, 'anon cannot call last_heartbeat');
 reset role;
 
 -- ─── Admin (Alex) ───────────────────────────────────────────────────────────────

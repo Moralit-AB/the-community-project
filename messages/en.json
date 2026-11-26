@@ -254,7 +254,12 @@
     "members": "Members",
     "upcomingEvents": "Upcoming events",
     "unpaid": "Unpaid fees {period} ({reported} reported)",
-    "setupHint": "Setting up? The <link>setup check</link> shows whether everything is configured correctly."
+    "setupHint": "Setting up? The <link>setup check</link> shows whether everything is configured correctly.",
+    "heartbeat": {
+      "title": "Your database may be paused soon",
+      "stale": "The daily job last ran {days, plural, one {# day} other {# days}} ago. Supabase pauses free projects after about a week without activity. The <link>setup check</link> shows how to fix it.",
+      "never": "The daily job hasn't run yet. That's normal on a new site's first day. Otherwise see the <link>setup check</link>, or Supabase may pause your free project."
+    }
   },
   "AdminMembers": {
     "title": "Members",
@@ -494,6 +499,10 @@
       "cron": {
         "title": "Daily job (event reminders)",
         "fix": "Set CRON_SECRET in Vercel so reminders are sent and your free Supabase project stays active."
+      },
+      "heartbeat": {
+        "title": "Daily job ran recently",
+        "fix": "The daily job hasn't run in the last 2 days, so Supabase may pause your free project within a week. Check that CRON_SECRET is set in Vercel, and look under Vercel → your project → Settings → Cron Jobs. On a new site it first runs at 07:00 UTC."
       },
       "config": {
         "title": "Community details",

@@ -3,7 +3,7 @@ import { updateSession } from "@/lib/supabase/proxy";
 
 // Paths anyone can open without logging in. Everything else requires a session.
 // Membership status (pending/approved) and admin rights are checked in the layouts.
-const PUBLIC_PATHS = ["/", "/join", "/login", "/privacy", "/auth", "/api/cron", "/dev/login"];
+const PUBLIC_PATHS = ["/", "/join", "/login", "/privacy", "/auth", "/api/cron", "/api/health", "/dev/login"];
 
 function isPublic(pathname: string) {
   return PUBLIC_PATHS.some((p) => pathname === p || (p !== "/" && pathname.startsWith(p + "/")));

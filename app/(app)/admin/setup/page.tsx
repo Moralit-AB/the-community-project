@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { config, hasMembershipFee } from "@/lib/config";
 import { verifySmtp } from "@/lib/email/send";
 import { envStatus, serverEnv } from "@/lib/env";
+import { heartbeatStatus } from "@/lib/heartbeat";
 import { publicEnv } from "@/lib/env-public";
 import { SCHEMA_VERSION } from "@/lib/schema-version";
 import { BRANDING_BUCKET } from "@/lib/settings";
@@ -67,6 +68,15 @@ async function runChecks(host: string | null): Promise<Check[]> {
       .limit(1)
       .maybeSingle();
     checks.push({ key: "privacy", status: policy && !policy.is_default ? "ok" : "warn" });
+
+    // The daily job's heartbeat keeps a free Supabase project from pausing (lib/heartbeat.ts).
+    const { data: lastHeartbeat } = await admin.rpc("last_heartbeat");
+    const beat = heartbeatStatus(lastHeartbeat);
+    checks.push({
+      key: "heartbeat",
+      status: beat === "ok" ? "ok" : beat === "never" ? "warn" : "fail",
+      detail: lastHeartbeat ? `last run ${new Date(lastHeartbeat).toISOString()}` : "never run",
+    });
   }
 
   const smtp = await verifySmtp();

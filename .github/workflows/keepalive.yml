@@ -1,0 +1,35 @@
+# OPTIONAL second keep-alive for a free Supabase project.
+#
+# Supabase pauses free projects after about a week with too little database activity. The
+# daily Vercel job (/api/cron/daily) already prevents that. This workflow is a backup: twice a
+# day it opens your site's /api/health page, which runs one tiny database read. If that fails,
+# the run fails and GitHub emails you.
+#
+# Setup (one time, in YOUR repository on GitHub):
+#   Settings → Secrets and variables → Actions → Variables → New repository variable:
+#     Name: KEEPALIVE_URL    Value: your site's address + /api/health,
+#                                   e.g. https://my-community.vercel.app/api/health
+# Without KEEPALIVE_URL set, this workflow does nothing.
+#
+# Note: GitHub pauses scheduled workflows in repositories with no activity for 60 days, and
+# emails you first. Re-enable it under Actions → Keep database active, or merge the
+# monthly update pull request.
+name: Keep database active
+
+on:
+  schedule:
+    - cron: "17 1,13 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    if: vars.KEEPALIVE_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Open the health check
+        env:
+          KEEPALIVE_URL: ${{ vars.KEEPALIVE_URL }}
+        run: curl --fail --silent --show-error --max-time 60 --retry 3 --retry-delay 20 --retry-all-errors "$KEEPALIVE_URL"

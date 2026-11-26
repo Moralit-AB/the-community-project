@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (unreleased)
+Keeps a free Supabase project from pausing, however rarely members visit. **Database change:** run the new migration (see `docs/UPGRADING.md`).
+- **Heartbeat:** the daily job records when it ran, first and on its own, and fails visibly in Vercel's logs if the database doesn't answer.
+- **Early warning:** if the daily job hasn't run for 2 days, **Admin** shows a warning and the setup check shows **Daily job ran recently** in red. Supabase pauses after about a week.
+- **Optional backup keep-alive:** a public `/api/health` page that runs one tiny database read. Point a free uptime monitor at it, or set `KEEPALIVE_URL` to turn on the included GitHub workflow.
+
 ## 0.2.0 (unreleased)
 Security release. **Database change:** run the new migration (see `docs/UPGRADING.md`).
 - **Dependencies:** Next.js 16.4.6 (fixes critical advisories, including remote code execution and Server Actions denial of service), zod 4.6.7, nodemailer 10.6.1.
