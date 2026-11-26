@@ -151,7 +151,7 @@ In Supabase, go to **Authentication → Emails → SMTP Settings**. Turn on **En
 
 Click **Save changes**.
 
-Then go to **Authentication → Rate Limits** and set **Rate limit for sending emails** to at least `100` per hour. That allows many people to request login links at the same time, for example right after you announce the site.
+Then go to **Authentication → Rate Limits** and set **Rate limit for sending emails** to at least `100` per hour. That allows many people to request login links at the same time, for example right after you announce the site. On the same page, set **Rate limit for sign ups and sign ins** and **Rate limit for token verifications** to `300`. Every login goes through your site, so Supabase sees all your members as one visitor; the site applies its own per-person limits instead.
 
 Keep the same five values. Vercel needs them in step 8.
 

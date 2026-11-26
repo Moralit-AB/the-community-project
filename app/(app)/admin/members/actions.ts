@@ -11,6 +11,7 @@ import { currentPeriod, membershipReference } from "@/lib/membership";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import type { ActionResult, MemberStatus, PaymentStatus } from "@/lib/types";
+import { arg, idSchema, memberRoleSchema, memberStatusSchema, paymentStatusSchema } from "@/lib/validation";
 
 function refresh(memberId?: string) {
   revalidatePath("/admin", "layout");
@@ -24,6 +25,8 @@ async function friendlyError(error: { message: string }) {
 
 export async function setMemberStatus(memberId: string, status: MemberStatus, _: ActionResult): Promise<ActionResult> {
   await requireAdmin();
+  memberId = arg(idSchema, memberId);
+  status = arg(memberStatusSchema, status);
   const supabase = await createClient();
   const { data: before } = await supabase.from("profiles").select("status").eq("id", memberId).single();
   const { error } = await supabase.from("profiles").update({ status }).eq("id", memberId);
@@ -42,6 +45,8 @@ export async function setMemberRole(
   _: ActionResult,
 ): Promise<ActionResult> {
   await requireAdmin();
+  memberId = arg(idSchema, memberId);
+  role = arg(memberRoleSchema, role);
   const supabase = await createClient();
   const { error } = await supabase.from("profiles").update({ role }).eq("id", memberId);
   if (error) return { ok: false, message: await friendlyError(error) };
@@ -52,6 +57,7 @@ export async function setMemberRole(
 
 export async function deleteMember(memberId: string, _: ActionResult): Promise<ActionResult> {
   const me = await requireAdmin();
+  memberId = arg(idSchema, memberId);
   const t = await getTranslations("AdminMembers");
   if (memberId === me.id) return { ok: false, message: t("deleteSelf") };
   const { error } = await createAdminClient().auth.admin.deleteUser(memberId);
@@ -66,6 +72,8 @@ export async function setPaymentStatus(
   _: ActionResult,
 ): Promise<ActionResult> {
   const me = await requireAdmin();
+  paymentId = arg(idSchema, paymentId);
+  status = arg(paymentStatusSchema, status);
   const supabase = await createClient();
   const settled = status === "confirmed" || status === "waived";
   const { data, error } = await supabase
@@ -90,6 +98,8 @@ export async function createCurrentPayment(
   _: ActionResult,
 ): Promise<ActionResult> {
   const me = await requireAdmin();
+  memberId = arg(idSchema, memberId);
+  status = arg(paymentStatusSchema, status);
   const period = currentPeriod(config.membership.fee, config.timezone);
   const supabase = await createClient();
   const { data: member } = await supabase.from("profiles").select("member_number").eq("id", memberId).single();

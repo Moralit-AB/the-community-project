@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
 import { autoConfirm, clearMailbox, devLogin, followMagicLink, waitForEmail } from "./helpers";
+import { SCHEMA_VERSION } from "../lib/schema-version";
 
-// These tests expect a freshly seeded local database (`npm run setup:local -- --reset`).
+// These tests expect a freshly seeded local database; e2e/global-setup.ts resets it before each run.
 test.describe.configure({ mode: "serial" });
 
 const applicant = `newbie-${Date.now()}@example.test`;
@@ -108,6 +109,28 @@ test("members comment on announcements", async ({ page }) => {
   await expect(page.getByText("Hello from the e2e test")).toBeVisible();
 });
 
+test("deleted comments are hidden from members but kept for admins", async ({ page }) => {
+  await devLogin(page, "sam@example.test");
+  await page.goto("/announcements");
+  await page.getByText("Welcome to our new community platform!").click();
+  const comment = page.locator("div", { hasText: "Hello from the e2e test" }).last();
+  await comment.getByRole("button", { name: "Delete" }).click();
+  await expect(page.getByText("Hello from the e2e test")).toHaveCount(0);
+
+  await devLogin(page, "maja@example.test");
+  await page.goto("/announcements");
+  await page.getByText("Welcome to our new community platform!").click();
+  await expect(page.getByText("This comment was deleted.")).toBeVisible();
+  await expect(page.getByText("Hello from the e2e test")).toHaveCount(0);
+
+  await devLogin(page, "admin@example.test");
+  await page.goto("/announcements");
+  await page.getByText("Welcome to our new community platform!").click();
+  await expect(page.getByText("Deleted · only admins can see this")).toBeVisible();
+  await expect(page.getByText("Deleted by its author")).toBeVisible();
+  await expect(page.getByText("Hello from the e2e test")).toBeVisible();
+});
+
 test("privacy policy: public, editable, and members are asked to read updates", async ({ page }) => {
   autoConfirm(page);
   await page.context().clearCookies();
@@ -155,7 +178,7 @@ test("setup check, logo upload, exports and calendar file", async ({ page }) => 
 
   await page.goto("/admin/setup");
   await expect(page.getByText("Environment variables")).toBeVisible();
-  await expect(page.getByText(/schema v1 \/ expected v1/)).toBeVisible();
+  await expect(page.getByText(`schema v${SCHEMA_VERSION} / expected v${SCHEMA_VERSION}`)).toBeVisible();
 
   // 1×1 PNG
   const png = Buffer.from(
@@ -226,4 +249,22 @@ test("an unknown address gets the same answer but no email", async ({ page }) =>
   await page.getByRole("button", { name: "Send login link" }).click();
   await expect(page.getByText("Check your inbox")).toBeVisible();
   await expect(waitForEmail("stranger@example.test", /login link/i, 3000)).rejects.toThrow();
+});
+
+test("guessing login codes is rate limited", async ({ page }) => {
+  await page.context().clearCookies();
+  await page.goto("/login");
+  await page.getByLabel("Email address").fill("maja@example.test");
+  await page.getByRole("button", { name: "Send login link" }).click();
+  const tryCode = async () => {
+    await page.getByLabel(/Or enter the code/).fill("000000");
+    await Promise.all([
+      page.waitForResponse((r) => r.request().method() === "POST" && r.url().includes("/login")),
+      page.getByRole("button", { name: "Log in with code" }).click(),
+    ]);
+  };
+  for (let i = 0; i < 5; i++) await tryCode();
+  await expect(page.getByText("That code didn't work. Check it, or request a new link.")).toBeVisible();
+  await tryCode();
+  await expect(page.getByText(/Too many attempts/)).toBeVisible();
 });

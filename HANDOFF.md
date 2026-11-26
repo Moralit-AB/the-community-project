@@ -30,16 +30,30 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 ## How to verify
 - `npm run setup:local -- --reset && npm run dev`, then open http://localhost:3000/dev/login.
 - `npm test` (Vitest: config, periods, time zones, theme, CSV, translation key parity).
-- `npm run db:test` (pgTAP: 20 RLS and security invariants).
-- `npm run e2e` (Playwright: 16 flows, including real magic links and codes through Mailpit). If port 3000 is busy, set `E2E_BASE_URL`.
+- `npm run db:test` (pgTAP: 33 RLS and security invariants; needs fresh seed data, so run `npm run db:reset` first if you just ran e2e).
+- `npm run e2e` (Playwright: 18 flows, including real magic links and codes through Mailpit). It resets the local database to fresh demo data first (`E2E_SKIP_DB_RESET=1` skips that). If port 3000 is busy, set `E2E_BASE_URL`.
 - `npm run lint && npm run typecheck && npm run build`.
 - `npm run check:secrets`.
 
 ## Session log (newest first)
+### 2026-11-26 (security review, v0.2.0, schema v2)
+- Security review of the whole repo; fixes on branch `security-hardening` (not committed yet).
+- Dependencies: Next 16.4.6 (critical advisories in 16.3.8), zod, nodemailer, dev-only vite and minimatch. `npm audit` is clean.
+- Migration `20261126000001_security_hardening.sql`:
+  - A trigger on `auth.users` clears `encrypted_password`. Reproduced locally first: a password sign-up through the public Auth API kept working after the real owner confirmed the address by code (account pre-hijacking). `lib/auth.ts` also ignores sessions whose `amr` says `password`.
+  - Comments: deleting moves the text to the admin-only `announcement_comment_archive` and empties `body`. Deleted comments can't be edited or restored, new comments can't start out deleted, and authors must be approved members to edit.
+  - `report_*_payment` require an approved member.
+  - `rate_limits` table plus `rate_limit_hit()` (service role only), used by `lib/rate-limit.ts` in the login actions. Keys are HMAC hashes of IP and email. The cron job cleans up old windows.
+- `ADMIN_EMAILS` only promotes a profile that is still pending (first login), so demotions and suspensions stick.
+- Pending and rejected users can export and delete their data on `/pending` (`components/account-data.tsx`).
+- CSP header, zod checks for bound Server Action arguments (`lib/validation.ts`), Actions and gitleaks pinned to SHAs/digest, `.ics` `;` escaping.
+- README: raise Supabase's "sign ups and sign ins" and "token verifications" rate limits, because every login comes from the server's IP.
+- Open: the GDPR export doesn't include a member's own archived (deleted) comment text. The text of deleted accounts' comments is kept, anonymised.
 ### 2026-11-26 (publish)
 - Published the repo publicly at `Moralit-AB/the-community-project` and marked it as a template. Replaced the `<OWNER>` placeholders.
 - LICENSE now names Moralit AB. CI's typecheck runs `next typegen` first, because the route type helpers (`PageProps`, `LayoutProps`, `RouteContext`) didn't exist on a fresh checkout.
 - Moved to Node 26 LTS (supported until 2029-04-30): `.nvmrc`, `engines.node: 26.x` (Vercel uses it for builds and functions), `@types/node` 26, the README prerequisites, and GitHub Actions checkout, setup-node and upload-artifact v7.
+- `npm run e2e` now resets the local database first (`e2e/global-setup.ts`), because stale demo data made the tests fail: seeded events are dated relative to the seed time.
 ### 2026-10-02 (branding)
 - Replaced the generated letter icon with The Community Project mark: SVG favicon, `.ico` fallback, Apple touch icon, manifest icons (192, 512 and maskable 512), and the fallback logo in the header and footer (inverted in dark mode). Raster icons are made from the provided PNG with ImageMagick.
 ### 2026-10-02 (phase 9)

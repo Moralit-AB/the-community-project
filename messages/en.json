@@ -72,7 +72,7 @@
       "messageRequired": "Please write a short message.",
       "privacyRequired": "Please confirm that you have read the privacy policy.",
       "invalidCode": "That code didn't work. Check it, or request a new link.",
-      "rateLimited": "Too many attempts. Please wait a minute and try again.",
+      "rateLimited": "Too many attempts. Please wait a few minutes and try again.",
       "generic": "Something went wrong sending the email. Please try again later.",
       "linkExpired": "That login link has expired or was already used. Request a new one below."
     }
@@ -203,6 +203,9 @@
     "comments": "Comments ({count})",
     "formerMember": "Former member",
     "commentDeleted": "This comment was deleted.",
+    "deletedAdminOnly": "Deleted · only admins can see this",
+    "deletedByAuthor": "Deleted by its author",
+    "deletedByAdmin": "Removed by an admin",
     "deleteComment": "Delete",
     "commentPlaceholder": "Write a comment…",
     "postComment": "Post comment",

@@ -12,6 +12,9 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
   const { data } = await supabase.auth.getClaims();
   const id = data?.claims?.sub;
   if (!id) return null;
+  // Login is by email link or code only. The database never stores passwords; this is a second line of defence.
+  const amr = (data.claims.amr ?? []) as { method?: string }[];
+  if (amr.some((a) => a.method === "password")) return null;
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", id).maybeSingle();
   if (!profile) return null;
   return { id, email: profile.email, profile };

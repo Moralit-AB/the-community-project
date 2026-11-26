@@ -50,3 +50,4 @@ Developers can instead run `npx supabase link --project-ref <ref>` once, then `n
 | Version | Schema | Database changes to run |
 |---|---|---|
 | 0.1.0 | v1 | None. This is the initial version: run `supabase/setup.sql` once when setting up. |
+| 0.2.0 | v2 | `supabase/migrations/20261126000001_security_hardening.sql` (security fixes, **apply it as soon as possible**). Also raise two Supabase rate limits: see README step "Rate Limits". |

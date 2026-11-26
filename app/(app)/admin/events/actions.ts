@@ -11,6 +11,7 @@ import { notifyNewEvent } from "@/lib/email/notify";
 import { createClient } from "@/lib/supabase/server";
 import { zonedLocalToUtc } from "@/lib/time";
 import type { ActionResult, PaymentStatus } from "@/lib/types";
+import { arg, idSchema, paymentStatusSchema } from "@/lib/validation";
 
 const localDateTime = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/);
 const optional = <T extends z.ZodType>(schema: T) =>
@@ -51,6 +52,7 @@ function refresh(id?: string) {
 
 export async function saveEvent(eventId: string | null, _: ActionResult, formData: FormData): Promise<ActionResult> {
   const me = await requireAdmin();
+  if (eventId !== null) eventId = arg(idSchema, eventId);
   const t = await getTranslations("AdminEvents");
   const parsed = eventSchema.safeParse({
     ...Object.fromEntries(formData),
@@ -109,6 +111,7 @@ export async function saveEvent(eventId: string | null, _: ActionResult, formDat
 
 export async function deleteEvent(eventId: string, _: ActionResult): Promise<ActionResult> {
   await requireAdmin();
+  eventId = arg(idSchema, eventId);
   const supabase = await createClient();
   const { error } = await supabase.from("events").delete().eq("id", eventId);
   if (error) return { ok: false, message: (await getTranslations("AdminEvents"))("saveError") };
@@ -122,6 +125,8 @@ export async function setAttendeePayment(
   _: ActionResult,
 ): Promise<ActionResult> {
   const me = await requireAdmin();
+  attendeeId = arg(idSchema, attendeeId);
+  status = arg(paymentStatusSchema, status);
   const supabase = await createClient();
   const settled = status === "confirmed" || status === "waived";
   const { data, error } = await supabase
@@ -141,6 +146,7 @@ export async function setAttendeePayment(
 
 export async function removeAttendee(attendeeId: string, _: ActionResult): Promise<ActionResult> {
   await requireAdmin();
+  attendeeId = arg(idSchema, attendeeId);
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("event_attendees")

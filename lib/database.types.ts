@@ -20,6 +20,49 @@ export type Database = {
   };
   public: {
     Tables: {
+      announcement_comment_archive: {
+        Row: {
+          body: string;
+          comment_id: string;
+          deleted_at: string;
+          deleted_by: string | null;
+        };
+        Insert: {
+          body: string;
+          comment_id: string;
+          deleted_at?: string;
+          deleted_by?: string | null;
+        };
+        Update: {
+          body?: string;
+          comment_id?: string;
+          deleted_at?: string;
+          deleted_by?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "announcement_comment_archive_comment_id_fkey";
+            columns: ["comment_id"];
+            isOneToOne: true;
+            referencedRelation: "announcement_comments";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "announcement_comment_archive_deleted_by_fkey";
+            columns: ["deleted_by"];
+            isOneToOne: false;
+            referencedRelation: "member_names";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "announcement_comment_archive_deleted_by_fkey";
+            columns: ["deleted_by"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       announcement_comments: {
         Row: {
           announcement_id: string;
@@ -560,6 +603,24 @@ export type Database = {
           },
         ];
       };
+      rate_limits: {
+        Row: {
+          hits: number;
+          key: string;
+          window_start: string;
+        };
+        Insert: {
+          hits?: number;
+          key: string;
+          window_start: string;
+        };
+        Update: {
+          hits?: number;
+          key?: string;
+          window_start?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       member_names: {
@@ -595,6 +656,8 @@ export type Database = {
       is_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
       is_member: { Args: Record<PropertyKey, never>; Returns: boolean };
       is_trusted_context: { Args: Record<PropertyKey, never>; Returns: boolean };
+      rate_limit_cleanup: { Args: Record<PropertyKey, never>; Returns: undefined };
+      rate_limit_hit: { Args: { p_key: string; p_limit: number; p_window_seconds: number }; Returns: boolean };
       report_event_payment: { Args: { p_event_id: string }; Returns: undefined };
       report_membership_payment: { Args: { p_payment_id: string }; Returns: undefined };
       rsvp_event: { Args: { p_event_id: string; p_going: boolean }; Returns: string };

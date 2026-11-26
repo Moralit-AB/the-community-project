@@ -20,7 +20,7 @@ Start with **Admin → Setup check**: it detects most configuration problems and
 - The email template must be the one from `supabase/templates/` (README step 6). It uses `{{ .SiteURL }}/auth/confirm`.
 
 **I logged in but I'm not admin**
-- `ADMIN_EMAILS` in Vercel must contain exactly the address you log in with. After changing it, **Redeploy**, then log out and back in.
+- `ADMIN_EMAILS` in Vercel must contain exactly the address you log in with. After changing it, **Redeploy**, then log out and back in. This works only while that account is still waiting for approval; if it is already an approved member, another admin must make it an admin in **Admin → Members**.
 
 **"Your request has been received" for an existing member**
 - That person's status is *pending*, *rejected* or *suspended*. An admin can change it under **Admin → Members**.

@@ -10,7 +10,7 @@ import { formatDate, formatDateTime } from "@/lib/time";
 import { ActionForm } from "@/components/action-form";
 import { Markdown } from "@/components/markdown";
 import { SubmitButton } from "@/components/submit-button";
-import { Card, SectionTitle, Textarea } from "@/components/ui";
+import { Badge, Card, SectionTitle, Textarea } from "@/components/ui";
 import { addComment, deleteComment } from "./actions";
 
 async function load(id: string) {
@@ -37,6 +37,13 @@ export default async function AnnouncementPage({ params }: PageProps<"/announcem
     : { data: [] };
   const names = await memberNames([post.author_id, ...(comments ?? []).map((c) => c.author_id)]);
   const isAdmin = user.profile.role === "admin";
+  // The text of deleted comments is kept for moderation, readable by admins only (RLS).
+  const deletedIds = (comments ?? []).filter((c) => c.deleted_at).map((c) => c.id);
+  const { data: archived } =
+    isAdmin && deletedIds.length > 0
+      ? await supabase.from("announcement_comment_archive").select("*").in("comment_id", deletedIds)
+      : { data: [] };
+  const archive = new Map((archived ?? []).map((a) => [a.comment_id, a]));
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
@@ -66,7 +73,22 @@ export default async function AnnouncementPage({ params }: PageProps<"/announcem
                 <span>{formatDateTime(c.created_at, locale, config.timezone)}</span>
               </div>
               {c.deleted_at ? (
-                <p className="mt-1 text-sm italic text-muted">{t("commentDeleted")}</p>
+                <>
+                  <p className="mt-1 text-sm italic text-muted">{t("commentDeleted")}</p>
+                  {archive.has(c.id) && (
+                    <div className="mt-2 space-y-1 rounded-md border border-dashed border-border p-2">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+                        <Badge tone="warning">{t("deletedAdminOnly")}</Badge>
+                        <span>
+                          {archive.get(c.id)!.deleted_by && archive.get(c.id)!.deleted_by === c.author_id
+                            ? t("deletedByAuthor")
+                            : t("deletedByAdmin")}
+                        </span>
+                      </div>
+                      <p className="whitespace-pre-wrap text-sm text-muted">{archive.get(c.id)!.body}</p>
+                    </div>
+                  )}
+                </>
               ) : (
                 <>
                   <p className="mt-1 whitespace-pre-wrap text-sm">{c.body}</p>

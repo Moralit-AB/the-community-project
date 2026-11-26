@@ -52,7 +52,7 @@ Nothing is charged automatically, and the platform never sees card or bank detai
 | `NEXT_PUBLIC_SUPABASE_URL` | no | Supabase → Project Settings → Data API → Project URL |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | no | Supabase → Project Settings → API Keys → Publishable key |
 | `SUPABASE_SECRET_KEY` | **yes** | Supabase → Project Settings → API Keys → Secret key. Bypasses all security rules, so keep it safe. |
-| `ADMIN_EMAILS` | yes* | Comma-separated. These addresses become admins when they log in. |
+| `ADMIN_EMAILS` | yes* | Comma-separated. These addresses become admins the first time they log in. After that, roles are managed in **Admin → Members**: removing or suspending an admin sticks even if their address is still listed. |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` | yes* | Your email provider's SMTP server (port 465 = SSL, 587 = STARTTLS) |
 | `SMTP_PASS` | **yes** | SMTP password or API key |
 | `SMTP_FROM` | no | Sender, e.g. `My Community <hello@example.org>` |
@@ -60,7 +60,7 @@ Nothing is charged automatically, and the platform never sees card or bank detai
 
 \*Not dangerous on their own, but keep them out of git anyway.
 
-The daily job runs at 07:00 UTC (see `vercel.json`). It sends reminders for events starting within the next 24 hours.
+The daily job runs at 07:00 UTC (see `vercel.json`). It sends reminders for events starting within the next 24 hours and clears old login rate-limit counters.
 
 ## Admin → Settings
 

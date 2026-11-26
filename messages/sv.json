@@ -72,7 +72,7 @@
       "messageRequired": "Skriv ett kort meddelande.",
       "privacyRequired": "Bekräfta att du har läst integritetspolicyn.",
       "invalidCode": "Koden fungerade inte. Kontrollera den, eller begär en ny länk.",
-      "rateLimited": "För många försök. Vänta en minut och försök igen.",
+      "rateLimited": "För många försök. Vänta några minuter och försök igen.",
       "generic": "Något gick fel när mejlet skulle skickas. Försök igen senare.",
       "linkExpired": "Inloggningslänken har gått ut eller redan använts. Begär en ny nedan."
     }
@@ -203,6 +203,9 @@
     "comments": "Kommentarer ({count})",
     "formerMember": "Tidigare medlem",
     "commentDeleted": "Kommentaren har tagits bort.",
+    "deletedAdminOnly": "Borttagen · bara admins ser detta",
+    "deletedByAuthor": "Borttagen av skribenten",
+    "deletedByAdmin": "Borttagen av en admin",
     "deleteComment": "Ta bort",
     "commentPlaceholder": "Skriv en kommentar…",
     "postComment": "Skicka kommentar",

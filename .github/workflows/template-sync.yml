@@ -17,6 +17,7 @@ on:
     - cron: "0 6 1 * *"
   workflow_dispatch:
 
+# Third-party code is pinned to exact commits/digests, so a moved tag can't change what runs.
 permissions:
   contents: write
   pull-requests: write
@@ -26,8 +27,8 @@ jobs:
     if: vars.UPSTREAM_REPO != '' && vars.UPSTREAM_REPO != github.repository
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: AndreasAugustin/actions-template-sync@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: AndreasAugustin/actions-template-sync@6e1d0089686f8940604fc15baae62367bf6ee860 # v2
         with:
           source_repo_path: ${{ vars.UPSTREAM_REPO }}
           upstream_branch: main
