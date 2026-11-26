@@ -494,6 +494,10 @@
       "cron": {
         "title": "Dagligt jobb (påminnelser)",
         "fix": "Sätt CRON_SECRET i Vercel så att påminnelser skickas och ert gratis Supabase-projekt hålls aktivt."
+      },
+      "config": {
+        "title": "Uppgifter om gemenskapen",
+        "fix": "Ändra namn och kontaktadress i community.config.ts."
       }
     }
   },
