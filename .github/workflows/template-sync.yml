@@ -7,7 +7,8 @@
 # Setup (one time, in YOUR repository on GitHub):
 #   1. Settings → Secrets and variables → Actions → Variables → New variable:
 #        Name: UPSTREAM_REPO    Value: the original repo, e.g. Moralit-AB/the-community-project
-#   2. Settings → Actions → General → Workflow permissions:
+#   2. Settings → Actions → General → Workflow # Third-party code is pinned to exact commits/digests, so a moved tag can't change what runs.
+permissions:
 #        tick "Allow GitHub Actions to create and approve pull requests".
 # Without UPSTREAM_REPO set, this workflow does nothing.
 name: Update from The Community Project
@@ -26,8 +27,8 @@ jobs:
     if: vars.UPSTREAM_REPO != '' && vars.UPSTREAM_REPO != github.repository
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: AndreasAugustin/actions-template-sync@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: AndreasAugustin/actions-template-sync@6e1d0089686f8940604fc15baae62367bf6ee860 # v2
         with:
           source_repo_path: ${{ vars.UPSTREAM_REPO }}
           upstream_branch: main

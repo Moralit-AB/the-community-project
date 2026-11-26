@@ -9,6 +9,7 @@ import { requireAdmin } from "@/lib/auth";
 import { notifyNewAnnouncement } from "@/lib/email/notify";
 import { createClient } from "@/lib/supabase/server";
 import type { ActionResult } from "@/lib/types";
+import { arg, idSchema } from "@/lib/validation";
 
 const schema = z.object({
   title: z.string().trim().min(1).max(200),
@@ -24,6 +25,7 @@ function refresh(id?: string) {
 
 export async function saveAnnouncement(id: string | null, _: ActionResult, formData: FormData): Promise<ActionResult> {
   const me = await requireAdmin();
+  if (id !== null) id = arg(idSchema, id);
   const t = await getTranslations("AdminAnnouncements");
   const parsed = schema.safeParse({ title: formData.get("title"), body: formData.get("body") ?? "" });
   if (!parsed.success) return { ok: false, message: t("invalid") };
@@ -69,6 +71,7 @@ export async function saveAnnouncement(id: string | null, _: ActionResult, formD
 
 export async function deleteAnnouncement(id: string, _: ActionResult): Promise<ActionResult> {
   await requireAdmin();
+  id = arg(idSchema, id);
   const supabase = await createClient();
   await supabase.from("announcements").delete().eq("id", id);
   refresh();

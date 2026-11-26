@@ -20,7 +20,7 @@ Start with **Admin → Setup check**: it detects most configuration problems and
 - The email template must be the one from `supabase/templates/` (README step 6). It uses `{{ .SiteURL }}/auth/confirm`.
 
 **I logged in but I'm not admin**
-- `ADMIN_EMAILS` in Vercel must contain exactly the address you log in with. After changing it, **Redeploy**, then log out and back in.
+- `ADMIN_EMAILS` in Vercel must contain exactly the address you log in with. After changing it, **Redeploy**, then log out and back in. This works only while that account is still waiting for approval; if it is already an approved member, another admin must make it an admin in **Admin → Members**.
 
 **"Your request has been received" for an existing member**
 - That person's status is *pending*, *rejected* or *suspended*. An admin can change it under **Admin → Members**.
@@ -39,8 +39,12 @@ Start with **Admin → Setup check**: it detects most configuration problems and
 ## Running
 
 **Supabase project paused**
-- Free projects pause after a week with no activity. Click **Restore** in the Supabase dashboard.
-- To prevent it, make sure `CRON_SECRET` is set in Vercel. The daily job keeps the project active. You can check it under Vercel → your project → **Settings → Cron Jobs**.
+- Free projects pause after about a week with too little database activity. In the Supabase dashboard, open the project and click **Resume project**. The data is kept, and this works for up to a year.
+- The daily job normally prevents it. **Admin → Setup check → Daily job ran recently** shows when it last ran. If it's red, make sure `CRON_SECRET` is set in Vercel, then check Vercel → your project → **Settings → Cron Jobs** and **Logs** for `/api/cron/daily`.
+- For a second safeguard, see [Keeping the database awake](CONFIGURATION.md#keeping-the-database-awake).
+
+**Admin shows "Your database may be paused soon"**
+- The daily job hasn't run for 2 days or more. Fix it as described above. Supabase pauses after about a week, so there's time.
 
 **Members don't get notification emails**
 - **Admin → Setup check → Email sending (SMTP)** shows the error from your provider.

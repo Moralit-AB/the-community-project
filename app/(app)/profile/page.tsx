@@ -4,8 +4,9 @@ import { requireMember } from "@/lib/auth";
 import { config } from "@/lib/config";
 import { ActionForm } from "@/components/action-form";
 import { SubmitButton } from "@/components/submit-button";
-import { ButtonLink, Card, Checkbox, Field, Input, PageHeader, SectionTitle, Select } from "@/components/ui";
-import { deleteAccount, updateProfile } from "./actions";
+import { Card, Checkbox, Field, Input, PageHeader, Select } from "@/components/ui";
+import { updateProfile } from "./actions";
+import { AccountDataSections } from "@/components/account-data";
 import { LANGUAGE_NAMES } from "@/lib/config-schema";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -54,30 +55,7 @@ export default async function ProfilePage() {
         </ActionForm>
       </Card>
 
-      <section>
-        <SectionTitle>{t("yourData")}</SectionTitle>
-        <Card className="space-y-3">
-          <p className="text-sm text-muted">{t("exportBody")}</p>
-          <ButtonLink href="/profile/export" variant="secondary" prefetch={false}>
-            {t("export")}
-          </ButtonLink>
-        </Card>
-      </section>
-
-      <section>
-        <SectionTitle>{t("deleteTitle")}</SectionTitle>
-        <Card className="space-y-3 border-red-300 dark:border-red-900">
-          <p className="text-sm text-muted">{t("deleteBody")}</p>
-          <ActionForm action={deleteAccount} className="space-y-3">
-            <Field label={t("deleteConfirmLabel", { email: profile.email })} htmlFor="confirm">
-              <Input id="confirm" name="confirm" autoComplete="off" required />
-            </Field>
-            <SubmitButton variant="danger" confirm={t("deleteConfirmDialog")}>
-              {t("deleteButton")}
-            </SubmitButton>
-          </ActionForm>
-        </Card>
-      </section>
+      <AccountDataSections email={profile.email} />
     </div>
   );
 }

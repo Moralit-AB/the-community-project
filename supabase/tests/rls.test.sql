@@ -2,13 +2,19 @@
 -- Uses the demo users from supabase/seed.sql.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(20);
+select plan(33);
 
 -- Helpers to act as a given user.
 create or replace function pg_temp.act_as(uid uuid) returns void language plpgsql as $$
 begin
   perform set_config('request.jwt.claims', json_build_object('sub', uid, 'role', 'authenticated')::text, true);
   execute 'set local role authenticated';
+end $$;
+
+create or replace function pg_temp.act_as_trusted() returns void language plpgsql as $$
+begin
+  execute 'reset role';
+  perform set_config('request.jwt.claims', '{}', true);
 end $$;
 
 create or replace function pg_temp.act_as_anon() returns void language plpgsql as $$
@@ -61,6 +67,67 @@ select throws_ok(
   '42501', null, 'member cannot reassign comment authors');
 reset role;
 
+-- ─── Comment moderation ────────────────────────────────────────────────────────
+-- Maja (…02) deletes her own comment.
+select pg_temp.act_as('00000000-0000-4000-8000-000000000002');
+select lives_ok(
+  $$update public.announcement_comments set deleted_at = now()
+    where author_id = '00000000-0000-4000-8000-000000000002'$$,
+  'author can delete their own comment');
+select is(
+  (select body from public.announcement_comments where author_id = '00000000-0000-4000-8000-000000000002'), '',
+  'a deleted comment has no text');
+select throws_ok(
+  $$update public.announcement_comments set deleted_at = null
+    where author_id = '00000000-0000-4000-8000-000000000002'$$,
+  '42501', null, 'author cannot restore a deleted comment');
+select throws_ok(
+  $$update public.announcement_comments set body = 'edited'
+    where author_id = '00000000-0000-4000-8000-000000000002'$$,
+  '42501', null, 'author cannot edit a deleted comment');
+reset role;
+
+select pg_temp.act_as('00000000-0000-4000-8000-000000000004');
+select is((select count(*) from public.announcement_comment_archive)::int, 0,
+  'members cannot read deleted comment text');
+select lives_ok(
+  $$insert into public.announcement_comments (announcement_id, body, deleted_at)
+    values ('00000000-0000-4000-a000-000000000001', 'sneaky', now())$$,
+  'member can post a comment');
+select ok(
+  (select deleted_at is null from public.announcement_comments where body = 'sneaky'),
+  'a new comment cannot start out deleted');
+reset role;
+
+select pg_temp.act_as('00000000-0000-4000-8000-000000000001');
+select is(
+  (select body from public.announcement_comment_archive limit 1), 'Hi everyone! Love this 🎉',
+  'admins can read deleted comment text');
+reset role;
+
+-- Sam (…03) is suspended.
+select pg_temp.act_as_trusted();
+update public.profiles set status = 'suspended' where id = '00000000-0000-4000-8000-000000000003';
+select pg_temp.act_as('00000000-0000-4000-8000-000000000003');
+update public.announcement_comments set body = 'changed' where author_id = '00000000-0000-4000-8000-000000000003';
+reset role;
+select pg_temp.act_as_trusted();
+select is(
+  (select body from public.announcement_comments where author_id = '00000000-0000-4000-8000-000000000003'),
+  'So much better than the group chat.', 'suspended member cannot edit their comments');
+select pg_temp.act_as('00000000-0000-4000-8000-000000000003');
+select throws_ok(
+  $$select public.report_event_payment('00000000-0000-4000-9000-000000000002')$$,
+  '42501', null, 'suspended member cannot report a payment');
+reset role;
+
+-- ─── Server-only tables ─────────────────────────────────────────────────────────
+select pg_temp.act_as('00000000-0000-4000-8000-000000000004');
+select throws_ok($$select public.rate_limit_hit('x', 1, 60)$$, '42501', null,
+  'members cannot call the rate limiter');
+select throws_ok('select count(*) from public.rate_limits', '42501', null, 'members cannot read rate limits');
+reset role;
+
 -- ─── Admin (Alex) ───────────────────────────────────────────────────────────────
 select pg_temp.act_as('00000000-0000-4000-8000-000000000001');
 select is((select count(*) from public.profiles)::int, 5, 'admin sees all profiles');
@@ -68,6 +135,13 @@ select throws_ok(
   $$update public.profiles set role = 'member' where id = '00000000-0000-4000-8000-000000000001'$$,
   'P0001', null, 'the last admin cannot be demoted');
 reset role;
+
+-- ─── No passwords ───────────────────────────────────────────────────────────────
+select pg_temp.act_as_trusted();
+insert into auth.users (id, email, encrypted_password, aud, role)
+values ('00000000-0000-4000-8000-0000000000ff', 'pw@example.test', '$2a$10$abcdefghijklmnopqrstuv', 'authenticated', 'authenticated');
+select is((select encrypted_password from auth.users where id = '00000000-0000-4000-8000-0000000000ff'), '',
+  'passwords are never stored');
 
 select * from finish();
 rollback;

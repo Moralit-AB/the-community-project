@@ -17,7 +17,7 @@ export function safeNextPath(value: string | null | undefined): string | null {
 
 /**
  * Runs after a successful magic-link or code login. It:
- *  - makes ADMIN_EMAILS addresses approved admins (first-time bootstrap)
+ *  - makes ADMIN_EMAILS addresses approved admins at their first login (bootstrap)
  *  - auto-approves members when the config says no approval is needed
  *  - emails the admins about a new membership request (once)
  *  - syncs the language between the profile and the cookie
@@ -30,7 +30,9 @@ export async function afterLogin(userId: string): Promise<string> {
 
   let status = profile.status;
 
-  if (serverEnv.adminEmails.includes(profile.email) && (profile.role !== "admin" || status !== "approved")) {
+  // ADMIN_EMAILS only decides who becomes an admin at their first login. After that the
+  // admin pages decide, so demoting or suspending someone sticks even if they are still listed.
+  if (serverEnv.adminEmails.includes(profile.email) && status === "pending") {
     await admin.from("profiles").update({ role: "admin", status: "approved" }).eq("id", userId);
     status = "approved";
   } else if (status === "pending" && !config.membership.requireApproval) {

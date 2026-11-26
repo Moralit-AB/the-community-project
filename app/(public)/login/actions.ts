@@ -8,6 +8,7 @@ import { config } from "@/lib/config";
 import { serverEnv } from "@/lib/env";
 import { publicEnv } from "@/lib/env-public";
 import { afterLogin, NEXT_COOKIE, safeNextPath } from "@/lib/post-login";
+import { allowAttempt } from "@/lib/rate-limit";
 import { getPrivacyPolicy } from "@/lib/settings";
 import { createClient } from "@/lib/supabase/server";
 
@@ -30,6 +31,7 @@ export async function requestLogin(_: AuthStep, formData: FormData): Promise<Aut
   const t = await getTranslations("Auth");
   const email = emailSchema.safeParse(formData.get("email"));
   if (!email.success) return { ok: false, message: t("errors.invalidEmail") };
+  if (!(await allowAttempt("request", email.data))) return { ok: false, message: t("errors.rateLimited") };
 
   const next = safeNextPath(formData.get("next")?.toString());
   if (next) (await cookies()).set(NEXT_COOKIE, next, { path: "/", maxAge: 3600, httpOnly: true, sameSite: "lax" });
@@ -81,6 +83,8 @@ export async function requestJoin(_: AuthStep, formData: FormData): Promise<Auth
     return { ok: false, message: t(`errors.${key}`) };
   }
 
+  if (!(await allowAttempt("request", parsed.data.email))) return { ok: false, message: t("errors.rateLimited") };
+
   const locale = await getLocale();
   const policy = await getPrivacyPolicy(locale);
   const supabase = await createClient();
@@ -106,6 +110,8 @@ export async function verifyCode(_: AuthStep, formData: FormData): Promise<AuthS
   const email = emailSchema.safeParse(formData.get("email"));
   const token = String(formData.get("code") ?? "").replace(/\s/g, "");
   if (!email.success || !/^\d{6,10}$/.test(token)) return { ok: false, message: t("errors.invalidCode") };
+  if (!(await allowAttempt("verify", email.data)))
+    return { ok: false, email: email.data, message: t("errors.rateLimited") };
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.verifyOtp({ email: email.data, token, type: "email" });

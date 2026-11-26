@@ -98,7 +98,7 @@ public/brand/           # The Community Project mark (svg/png): default logo; ap
   - Render markdown with `components/markdown.tsx`; raw HTML is disabled.
   - Escape user content in emails (`escapeHtml`).
   - Guard CSV cells against formulas (`lib/csv.ts`).
-- **ADMIN_EMAILS:** these addresses may create an account from `/login`, so the very first admin can just log in. They are promoted in `lib/post-login.ts`.
+- **ADMIN_EMAILS:** these addresses may create an account from `/login`, so the very first admin can just log in. They are promoted in `lib/post-login.ts`, but only while their profile is still pending (first login), so demotions and suspensions made in the admin UI stick.
 - **Style:** keep it simple and readable. Small server components, client components only where needed for interactivity.
 
 ## Commands
