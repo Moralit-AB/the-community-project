@@ -79,7 +79,7 @@ You'll need:
 
 ### Step 1: Create your own copy on GitHub
 
-1. Open the project page on GitHub: `https://github.com/<OWNER>/the-community-project`.
+1. Open the project page on GitHub: `https://github.com/Moralit-AB/the-community-project`.
 2. Click the green **Use this template** button, then **Create a new repository**.
 3. **Repository name:** e.g. `my-community`.
 4. Choose **Private**, so only you (and people you invite) can see your copy.
@@ -316,7 +316,7 @@ You can run the whole platform locally with demo data before you set anything up
 **You need:** [Node.js 22](https://nodejs.org) (or newer), [Docker Desktop](https://www.docker.com/products/docker-desktop/) running, and [Git](https://git-scm.com).
 
 ```bash
-git clone https://github.com/<OWNER>/the-community-project.git
+git clone https://github.com/Moralit-AB/the-community-project.git
 cd the-community-project
 npm install
 npm run setup:local   # starts a local Supabase in Docker, creates the database and demo data, writes .env.local

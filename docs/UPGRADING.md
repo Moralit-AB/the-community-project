@@ -10,7 +10,7 @@ Your repository includes `.github/workflows/template-sync.yml`. Once a month, it
 
 1. **Settings → Secrets and variables → Actions → Variables tab → New repository variable**
    - Name: `UPSTREAM_REPO`
-   - Value: `<OWNER>/the-community-project` (the original project)
+   - Value: `Moralit-AB/the-community-project` (the original project)
 2. **Settings → Actions → General → Workflow permissions:** tick **Allow GitHub Actions to create and approve pull requests** → **Save**.
 3. Optional, to run it right away: **Actions → Update from The Community Project → Run workflow**.
 
@@ -26,7 +26,7 @@ Your `community.config.ts` is never overwritten (see `.templatesyncignore`).
 ## Option B: manually with git
 
 ```bash
-git remote add upstream https://github.com/<OWNER>/the-community-project.git   # once
+git remote add upstream https://github.com/Moralit-AB/the-community-project.git   # once
 git fetch upstream
 git merge upstream/main --allow-unrelated-histories   # the flag is only needed the first time
 # resolve any conflicts (usually only community.config.ts: keep your values), then:

@@ -6,7 +6,7 @@
 #
 # Setup (one time, in YOUR repository on GitHub):
 #   1. Settings → Secrets and variables → Actions → Variables → New variable:
-#        Name: UPSTREAM_REPO    Value: the original repo, e.g. <OWNER>/the-community-project
+#        Name: UPSTREAM_REPO    Value: the original repo, e.g. Moralit-AB/the-community-project
 #   2. Settings → Actions → General → Workflow permissions:
 #        tick "Allow GitHub Actions to create and approve pull requests".
 # Without UPSTREAM_REPO set, this workflow does nothing.

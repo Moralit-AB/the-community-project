@@ -4,7 +4,7 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 **No secrets, keys, real member data or private deployment URLs in this file.** Use placeholders.
 
 ## Current status
-**All build phases (0–9) are done and tested locally. Next: rehearse the README on real cloud accounts, then the user does the acceptance run.**
+**All build phases (0–9) are done and tested locally. The repo is published at github.com/Moralit-AB/the-community-project as a public template. Next: rehearse the README on real cloud accounts, then the user does the acceptance run.**
 
 ## Build phases
 - [x] 0. Repo hygiene: gitignore, secret scanning, CLAUDE.md, HANDOFF.md, SECURITY.md, LICENSE
@@ -19,12 +19,10 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 - [x] 9. Launch: README, docs, Deploy button, CI, CONTRIBUTING, issue templates
 
 ## What's next
-1. **Publish the upstream repository** on GitHub, mark it as a template (Settings → General → "Template repository"), and replace `<OWNER>` in README.md, docs/UPGRADING.md and .github/workflows/template-sync.yml.
-2. **Rehearse the README** end to end on a fresh Supabase project, Vercel project and email provider. Fix any step that's unclear, and add dashboard screenshots where people might get stuck.
-3. **User acceptance:** copy the template privately, follow only the README, and launch the friend's community.
+1. **Rehearse the README** end to end on a fresh Supabase project, Vercel project and email provider. Fix any step that's unclear, and add dashboard screenshots where people might get stuck.
+2. **User acceptance:** copy the template privately, follow only the README, and launch the friend's community.
 
 ## Open decisions and known issues
-- **Upstream repo URL:** needed for the README's "Use this template" and Deploy-button links. Placeholder: `<OWNER>/the-community-project`.
 - **Changing your email address:** not supported in the UI in v1. An admin can change it in the Supabase dashboard (the `profiles.email` sync trigger handles it).
 - **Icons:** the browser-tab, home-screen and fallback-header icons are The Community Project's mark (`public/brand/`, `app/icon.svg`, `app/favicon.ico`, `app/apple-icon.png`, `public/icons/`). A logo uploaded in Admin → Settings replaces the mark in the header, but not in the browser tab or home-screen icon yet (a possible v2 feature). `app/icon.svg` is the provided SVG as-is. Its 9th dot is white, which shows up as an extra dot on dark browser tab bars.
 - **Payment QR code:** stored in the public `branding` bucket, so anyone with the URL can see it. That's acceptable for a payment QR code.
@@ -38,6 +36,8 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 - `npm run check:secrets`.
 
 ## Session log (newest first)
+### 2026-11-26 (publish)
+- Published the repo publicly at `Moralit-AB/the-community-project` and marked it as a template. Replaced the `<OWNER>` placeholders.
 ### 2026-10-02 (branding)
 - Replaced the generated letter icon with The Community Project mark: SVG favicon, `.ico` fallback, Apple touch icon, manifest icons (192, 512 and maskable 512), and the fallback logo in the header and footer (inverted in dark mode). Raster icons are made from the provided PNG with ImageMagick.
 ### 2026-10-02 (phase 9)
