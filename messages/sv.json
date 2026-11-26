@@ -254,7 +254,12 @@
     "members": "Medlemmar",
     "upcomingEvents": "Kommande evenemang",
     "unpaid": "Obetalda avgifter {period} ({reported} rapporterade)",
-    "setupHint": "Håller du på att sätta upp plattformen? <link>Installationskollen</link> visar om allt är rätt konfigurerat."
+    "setupHint": "Håller du på att sätta upp plattformen? <link>Installationskollen</link> visar om allt är rätt konfigurerat.",
+    "heartbeat": {
+      "title": "Databasen kan snart pausas",
+      "stale": "Det dagliga jobbet kördes senast för {days, plural, one {# dag} other {# dagar}} sedan. Supabase pausar gratisprojekt efter ungefär en vecka utan aktivitet. <link>Installationskollen</link> visar hur du åtgärdar det.",
+      "never": "Det dagliga jobbet har inte körts än. Det är normalt en ny webbplats första dag. Är webbplatsen äldre än så, se <link>installationskollen</link>. Annars kan Supabase pausa ert gratisprojekt."
+    }
   },
   "AdminMembers": {
     "title": "Medlemmar",
@@ -494,6 +499,10 @@
       "cron": {
         "title": "Dagligt jobb (påminnelser)",
         "fix": "Sätt CRON_SECRET i Vercel så att påminnelser skickas och ert gratis Supabase-projekt hålls aktivt."
+      },
+      "heartbeat": {
+        "title": "Dagligt jobb har körts nyligen",
+        "fix": "Det dagliga jobbet har inte körts de senaste 2 dagarna, så Supabase kan pausa ert gratisprojekt inom en vecka. Kontrollera att CRON_SECRET är satt i Vercel och titta under Vercel → ert projekt → Settings → Cron Jobs. På en ny webbplats körs det första gången kl. 07:00 UTC."
       },
       "config": {
         "title": "Uppgifter om gemenskapen",

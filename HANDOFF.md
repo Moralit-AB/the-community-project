@@ -30,12 +30,19 @@ A living status log for whoever picks up the work next, human or Claude. Update 
 ## How to verify
 - `npm run setup:local -- --reset && npm run dev`, then open http://localhost:3000/dev/login.
 - `npm test` (Vitest: config, periods, time zones, theme, CSV, translation key parity).
-- `npm run db:test` (pgTAP: 33 RLS and security invariants; needs fresh seed data, so run `npm run db:reset` first if you just ran e2e).
+- `npm run db:test` (pgTAP: 38 RLS and security invariants; needs fresh seed data, so run `npm run db:reset` first if you just ran e2e).
 - `npm run e2e` (Playwright: 18 flows, including real magic links and codes through Mailpit). It resets the local database to fresh demo data first (`E2E_SKIP_DB_RESET=1` skips that). If port 3000 is busy, set `E2E_BASE_URL`.
 - `npm run lint && npm run typecheck && npm run build`.
 - `npm run check:secrets`.
 
 ## Session log (newest first)
+### 2026-11-26 (Supabase pausing, v0.3.0, schema v3)
+- Supabase pauses Free projects after ~7 days of "low database activity" (warning email ~1 week before; restorable from the dashboard for up to 1 year). Member visits don't matter; the daily cron's database calls do.
+- Migration `20261126000002_heartbeat.sql`: `heartbeat()` (service role only) upserts `app_meta.last_heartbeat_at`; `last_heartbeat()` returns it to admins and the server. The cron calls `heartbeat()` first and returns 500 on database errors.
+- `lib/heartbeat.ts`: stale after 48 h. The admin overview shows a warning and the setup check a red "Daily job ran recently" item.
+- Opt-in backup: public `/api/health` (publishable key, one read, `{ok}` only; added to `PUBLIC_PATHS` in `proxy.ts`) and `.github/workflows/keepalive.yml` (runs only when the repo variable `KEEPALIVE_URL` is set). Docs: CONFIGURATION "Keeping the database awake", TROUBLESHOOTING, README costs section.
+- Decided against auto-restore through the Management API (`POST /v1/projects/{ref}/restore`): it needs an account-wide token in Vercel or GitHub, and it isn't documented whether it works on the Free plan.
+- On branch `feat/heartbeat`, built on top of `fix/security-hardening` (PR #1, schema v2). Not committed yet; open its PR after #1 is merged.
 ### 2026-11-26 (security review, v0.2.0, schema v2)
 - Security review of the whole repo; fixes on branch `security-hardening` (not committed yet).
 - Dependencies: Next 16.4.6 (critical advisories in 16.3.8), zod, nodemailer, dev-only vite and minimatch. `npm audit` is clean.

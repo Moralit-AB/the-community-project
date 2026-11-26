@@ -54,7 +54,7 @@ Many small communities (clubs, associations, groups of friends) organise everyth
 
 For most small communities this is **€0 per month**. Some limits to know about:
 
-- **Supabase pauses free projects after a week without activity.** The daily job that sends event reminders also keeps the project active, so this normally won't happen. If it does, open the Supabase dashboard and click **Restore**.
+- **Supabase pauses free projects after about a week without database activity.** How often your members visit doesn't matter: the site's daily job uses the database every day, so a community that meets once every few months stays active. If the daily job stops running, **Admin** shows a warning after 2 days, long before Supabase pauses anything. For extra safety, see [Keeping the database awake](docs/CONFIGURATION.md#keeping-the-database-awake). If a pause happens anyway, Supabase emails the account owner about a week before. A paused project keeps its data and can be restored with one click for up to a year.
 - **Vercel's Hobby plan is for personal and non-commercial use.** If your community is a business, or the site makes money beyond covering costs, Vercel requires the Pro plan (about $20/month). If in doubt, check [Vercel's fair use policy](https://vercel.com/docs/limits/fair-use-guidelines).
 - **Email limits.** The free plans are plenty for a few hundred members. If you send news to thousands of people, upgrade your email plan.
 
@@ -353,7 +353,7 @@ Change `community.config.ts` and the page updates as you save. When you're happy
 | **Login link leads to the wrong site / localhost** | Fix the **Site URL** in Supabase → Authentication → URL Configuration (step 9). |
 | **The first admin isn't admin** | `ADMIN_EMAILS` must contain exactly that address. Fix it in Vercel, **Redeploy**, then log out and in again. |
 | **The deployment fails with "community.config.ts is invalid"** | The error names the field. Fix it on GitHub; Vercel redeploys. |
-| **The site is very slow, or Supabase says "paused"** | Supabase dashboard → your project → **Restore**. Check `CRON_SECRET` is set (step 8). |
+| **The site is very slow, or Supabase says "paused"** | Supabase dashboard → your project → **Resume project**. Then check **Admin → Setup check → Daily job ran recently**, and that `CRON_SECRET` is set (step 8). |
 | **Members don't get notification emails** | **Admin → Setup check → Email sending**. The `SMTP_*` values in Vercel must match your provider. |
 
 More in [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).

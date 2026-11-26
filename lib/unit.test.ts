@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import rawConfig from "@/community.config";
 import { parseCommunityConfig } from "./config-schema";
 import { csvCell, toCsv } from "./csv";
+import { heartbeatAgeDays, heartbeatStatus } from "./heartbeat";
 import { currentPeriod, eventReference, isOverdue, membershipReference } from "./membership";
 import { contrastRatio, readableTextColor, safeColor, themeCss } from "./theme";
 import { formatRange, utcToZonedLocalInput, zonedLocalToUtc } from "./time";
@@ -112,5 +113,28 @@ describe("csv", () => {
     expect(csvCell("=HYPERLINK(1)")).toBe("'=HYPERLINK(1)");
     expect(csvCell(null)).toBe("");
     expect(toCsv(["a"], [[1]])).toBe("﻿a\r\n1\r\n");
+  });
+});
+
+describe("heartbeat", () => {
+  const now = new Date("2026-11-26T12:00:00Z");
+
+  it("is ok within two days", () => {
+    expect(heartbeatStatus("2026-11-25T07:00:00.123456+00:00", now)).toBe("ok");
+    expect(heartbeatStatus("2026-11-24T12:00:00Z", now)).toBe("ok");
+  });
+
+  it("is stale after two days", () => {
+    expect(heartbeatStatus("2026-11-24T11:59:00Z", now)).toBe("stale");
+  });
+
+  it("has never run when missing or unreadable", () => {
+    expect(heartbeatStatus(null, now)).toBe("never");
+    expect(heartbeatStatus("not a date", now)).toBe("never");
+  });
+
+  it("counts whole days", () => {
+    expect(heartbeatAgeDays("2026-11-26T07:00:00Z", now)).toBe(0);
+    expect(heartbeatAgeDays("2026-11-21T07:00:00Z", now)).toBe(5);
   });
 });

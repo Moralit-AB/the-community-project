@@ -653,9 +653,11 @@ export type Database = {
           going: number;
         }[];
       };
+      heartbeat: { Args: Record<PropertyKey, never>; Returns: string };
       is_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
       is_member: { Args: Record<PropertyKey, never>; Returns: boolean };
       is_trusted_context: { Args: Record<PropertyKey, never>; Returns: boolean };
+      last_heartbeat: { Args: Record<PropertyKey, never>; Returns: string };
       rate_limit_cleanup: { Args: Record<PropertyKey, never>; Returns: undefined };
       rate_limit_hit: { Args: { p_key: string; p_limit: number; p_window_seconds: number }; Returns: boolean };
       report_event_payment: { Args: { p_event_id: string }; Returns: undefined };
